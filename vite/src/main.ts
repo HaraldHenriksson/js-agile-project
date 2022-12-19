@@ -1,14 +1,10 @@
+import 'bootstrap/dist/css/bootstrap.css'
 import './style.css'
-import typescriptLogo from './typescript.svg'
-import { setupCounter } from './counter'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
     </a>
     <h1>Vite + TypeScript</h1>
     <div class="card">
@@ -20,4 +16,3 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   </div>
 `
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
