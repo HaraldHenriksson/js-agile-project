@@ -30,6 +30,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  font-family: 'Barlow Condensed', sans-serif;
 }
 
 h1 {
@@ -62,6 +63,10 @@ button:focus-visible {
 
 .price {
   color: grey;
+}
+
+.name {
+  color: rgb(216, 31, 80);
 }
 
 img {
