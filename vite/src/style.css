@@ -47,6 +47,10 @@ button:focus-visible {
   color: rgb(216, 31, 80);
 }
 
+.info {
+  text-decoration: underline;
+}
+
 img {
   height: 200px;
   width: 200px;
