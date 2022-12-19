@@ -1,17 +1,14 @@
-export interface products {
-    id?: number,
-    name: string,
-    description: string,
-    price: number,
-    on_sale: boolean,
+import {products} from './interface'
 
-    //Stämmer denna kod?? Titta upp!
-    images: []
-        thumbnail: string,
-        large: string
-    ,
 
+export const fetchProducts = async () => {
+    const res = await fetch('https://www.bortakvall.se/api/products/')
+    if (!res.ok) {
+        throw new Error(`${res.status} ${res.statusText}`)
+    }
+
+    const result = await res.json()
+    return result.data
+    // return await res.json() as products[]
     
-    stock_status: string,
-    stock_quantity: null
 }
