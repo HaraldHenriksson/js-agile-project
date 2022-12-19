@@ -14,4 +14,4 @@ export interface products {
     
     stock_status: string,
     stock_quantity: null
-},
+}
