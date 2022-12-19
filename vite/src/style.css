@@ -55,3 +55,34 @@ img {
   height: 200px;
   width: 200px;
 }
+
+.add, .remove {
+  display: inline-flex;
+  flex-direction: row;
+  font-weight: bold;
+  background: darkorange;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2px;
+  cursor: pointer;
+}
+
+.add {
+  margin-right: 8px;
+}
+
+.remove {
+  margin-left: 8px;
+}
+
+.trash {
+  cursor: pointer;
+}
+
+.cart-image {
+  width: 50px;
+  border: 1px solid lightgrey;
+}
