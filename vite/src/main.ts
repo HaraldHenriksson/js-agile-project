@@ -6,7 +6,9 @@ import { products } from './interface'
 
 //lokal variabel som innehåller alla produkter från server
 let productsCard: products[] = []
-let isRend =  false
+
+// test för att få eventlistener att fungerar på rederad data
+// let isRend =  false
 
 const getProducts = async () => {
   
@@ -17,9 +19,9 @@ const getProducts = async () => {
 
     renderProducts(productsCard);
 
+    // test för att få eventlistener att fungerar på rederad data
     // isRend = true
 }
-
 }
 
 
