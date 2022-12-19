@@ -20,7 +20,7 @@
       </div>
     </main>
     <!-- Varukorg start: Kan Copy/Pasta in där vi vill ha den. Ligger som d-none just nu-->
-      <div class="container cart-items d-none">
+      <div class="container cart-items">
         <h2>Varukorg</h2>
         <table class="table table-hover table-responsive align-middle">
           <thead>
@@ -30,7 +30,7 @@
             <th scope="col">Produkt</th>
             <th scope="col">Antal</th>
             <th scope="col">st pris</th>
-            <th scope="col">Totalt pris</th>
+            <th scope="col">Totalt</th>
             <th scope="col"><!-- Ta bort --></th>
           </tr>
           </thead>
@@ -53,13 +53,17 @@
             <td>30 sek</td>
             <td><span class="material-symbols-outlined trash">delete</span></td>
           </tr>
+          <tr>
+            <td colspan="5"></td>
+            <td><strong>37 sek</strong></td>
+            <td></td>
+          </tr>
           </tbody>
         </table>
         <div class="container-fluid d-flex justify-content-end">
           <button class="btn btn-primary">Gå till kassan</button>
         </div>
       </div>
-
     <!-- Varukorg slut -->
     <footer></footer>
     <script type="module" src="/src/main.ts"></script>
