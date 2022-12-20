@@ -23,6 +23,13 @@ h1 {
   padding: 2em;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 16px;
+  grid-auto-rows: 1fr
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
