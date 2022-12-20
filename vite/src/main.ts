@@ -38,16 +38,28 @@ function renderProducts(array:products[]) {
         <img src="https://www.bortakvall.se/${product.images.thumbnail}" alt="product">
         <h1 class="name">${product.name}</h1>
         <p class="price">${product.price}kr</p>
-        <a href="javascript:;" class="info">More info</a>
-        <p><button class="button" data-id="${product.id}">Add to Cart</button></p>
+        <a href="javascript:;" id="mInfo" data-id="${product.id}" class="info">More info</a>
+        <p><button class="button">Add to Cart</button></p>
       </div>
 		`)).join('')
 		
-    document.querySelector('.button')?.addEventListener('click', (e) => {
-      e.defaultPrevented
-      console.log();
-      
+    // more info button + gettin ID from target
+
+   
+  
+
+
+
+
+document.querySelector('#mInfo')?.addEventListener('click', (e) => {
+  console.log('hej');
+  const target = e.target as HTMLElement
+  console.log(target.dataset);
+  
+  document.querySelector('.mInfo')?.classList.toggle('d-none') 
+  
   })
+    
 }
 
 // Open Cart
