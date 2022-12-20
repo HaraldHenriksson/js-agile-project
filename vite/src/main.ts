@@ -49,7 +49,7 @@ function renderProducts(array:products[]) {
       </div>
 		`)).join('')
 		
-
+// type of "function" that target the product and displays its description with toggle effect
     const infoBtns = document.querySelectorAll('.info')
     console.log(infoBtns);
     infoBtns.forEach((btn) => {
