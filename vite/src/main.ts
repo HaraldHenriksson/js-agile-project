@@ -44,9 +44,10 @@ function renderProducts(array:products[]) {
         ${product.description}
       </div>
     </div>
-        <p><button class="button" >Add to Cart</button></p>
+    </div>
+        <p><button class="button" data-id="${product.id}">Add to Cart</button></p>
       </div>
-      </div>
+      
 		`)).join('')
 		
 // type of "function" that target the product and displays its description with toggle effect
