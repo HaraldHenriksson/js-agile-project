@@ -14,6 +14,12 @@
   </head>
   <body>
     <header>
+      <div class="container-fluid header-container">
+        <div class="container header d-flex justify-content-end align-items-center">
+          <span class="material-symbols-outlined cart-icon">shopping_cart</span>
+          <span class="cart-item-number">3</span>
+        </div>
+      </div>
     </header>
     <main>
       <!-- <div class="card">
@@ -23,10 +29,15 @@
         <a href="" class="info">More info</a>
         <p><button>Add to Cart</button></p>
       </div> -->
-    
-    <!-- Varukorg start: Kan Copy/Pasta in där vi vill ha den. Ligger som d-none just nu-->
-      <div class="container cart-items d-none">
-        <h2>Varukorg</h2>
+    </main>
+
+    <!-- Start: Varukorg - Centrerad modal för varukorgen -->
+    <div class="cart-container d-none">
+      <div class="cart-list">
+        <div class="cart-list-header">
+          <span class="cart-title">Varukorg</span>
+          <span class="material-symbols-outlined cart-close">cancel</span>
+        </div>
         <table class="table table-hover table-responsive align-middle">
           <thead>
           <tr>
@@ -59,21 +70,20 @@
             <td><span class="material-symbols-outlined trash">delete</span></td>
           </tr>
           <tr>
-            <td colspan="5"></td>
+            <td colspan="4"></td>
+            <td>Att betala</td>
             <td><strong>37 sek</strong></td>
             <td></td>
           </tr>
           </tbody>
         </table>
-        <div class="container-fluid d-flex justify-content-end">
-          <button class="btn btn-primary">Gå till kassan</button>
-        </div>
+        <button class="btn btn-primary">Gå till kassan</button>
       </div>
-    </main>
+    </div>
     <!-- Varukorg slut -->
-    <footer></footer>
-    <script type="module" src="/src/main.ts"></script>
 
- 
+    <footer></footer>
+    <script type="module" src="src/main.ts"></script>
+
   </body>
 </html>

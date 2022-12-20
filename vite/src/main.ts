@@ -8,7 +8,7 @@ import { products } from './interface'
 let productsCard: products[] = []
 
 // test för att få eventlistener att fungerar på rederad data
-// let isRend =  false
+// let isRend = false
 
 const getProducts = async () => {
   
@@ -21,13 +21,11 @@ const getProducts = async () => {
 
     // test för att få eventlistener att fungerar på rederad data
     // isRend = true
-}
+    }
 }
 
 
 getProducts()
-
-
 
 function renderProducts(array:products[]) {
 	// Render not completed todos
@@ -37,7 +35,11 @@ function renderProducts(array:products[]) {
         <img src="https://www.bortakvall.se/${product.images.thumbnail}" alt="product">
         <h1 class="name">${product.name}</h1>
         <p class="price">${product.price}kr</p>
+<<<<<<< HEAD
         <a href="('some html', yourWindowName')" class="info">More info</a>
+=======
+        <a href="" class="info">More info</a>
+>>>>>>> US-1
         <p><button class="button" data-id="${product.id}">Add to Cart</button></p>
       </div>
 		`)).join('')
@@ -45,6 +47,7 @@ function renderProducts(array:products[]) {
 }
 
 
+<<<<<<< HEAD
 document.querySelector<HTMLButtonElement>('.info')?.addEventListener('click', async (e) =>{
   
   //fungerar inte med Anchor!
@@ -54,4 +57,21 @@ document.querySelector<HTMLButtonElement>('.info')?.addEventListener('click', as
     
     
     
+=======
+document.querySelector('.button')?.addEventListener('click', (e) => {
+
+    e.defaultPrevented
+    console.log(e.target);
+
+})
+
+// Open Cart
+document.querySelector('.cart-icon')!.addEventListener('click', () => {
+    document.querySelector('.cart-container')!.classList.remove('d-none')
+})
+
+// Close cart
+document.querySelector('.cart-close')!.addEventListener('click', () => {
+    document.querySelector('.cart-container')!.classList.add('d-none')
+>>>>>>> US-1
 })
