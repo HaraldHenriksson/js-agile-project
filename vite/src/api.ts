@@ -8,6 +8,8 @@ export const fetchProducts = async () => {
     }
 
     const result = await res.json()
+
+
     return result.data
     // return await res.json() as products[]
     
