@@ -32,8 +32,9 @@ getProducts()
 //rendering av produkter på main sida
 function renderProducts(array:products[]) {
 
-	document.querySelector('main')!.innerHTML = array
+	document.querySelector('.grid-container')!.innerHTML = array
 		.map(product=> (`
+    <div class="card-grid">
         <div class="card">
         <img src="https://www.bortakvall.se/${product.images.thumbnail}" alt="product">
         <h1 class="name">${product.name}</h1>
@@ -47,6 +48,7 @@ function renderProducts(array:products[]) {
       </div>
     </div>
         <p><button class="button" data-id="${product.id}">Add to Cart</button></p>
+      </div>
       </div>
 		`)).join('')
 		
