@@ -37,7 +37,7 @@ function renderProducts(array:products[]) {
         <img src="https://www.bortakvall.se/${product.images.thumbnail}" alt="product">
         <h1 class="name">${product.name}</h1>
         <p class="price">${product.price}kr</p>
-        <a href=""class="info">More info</a>
+        <a href="('some html', yourWindowName')" class="info">More info</a>
         <p><button class="button" data-id="${product.id}">Add to Cart</button></p>
       </div>
 		`)).join('')
@@ -45,9 +45,13 @@ function renderProducts(array:products[]) {
 }
 
 
-document.querySelector('.button')?.addEventListener('click', (e) =>{
+document.querySelector<HTMLButtonElement>('.info')?.addEventListener('click', async (e) =>{
+  
+  //fungerar inte med Anchor!
+  // e.preventDefault()
 
-    e.defaultPrevented
-    console.log(e.target);
+  await console.log('hej')
+    
+    
     
 })
