@@ -43,10 +43,11 @@ function renderProducts(array:products[]) {
       <div class="card-body">
         ${product.description}
       </div>
-    </div>
-    </div>
-        <p><button class="button" data-id="${product.id}">Add to Cart</button></p>
       </div>
+      <p><button class="button" data-id="${product.id}">Add to Cart</button></p>
+    </div>
+    </div>
+   
       
 		`)).join('')
 		
