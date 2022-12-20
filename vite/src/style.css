@@ -1,13 +1,9 @@
 :root {
-<<<<<<< HEAD
-  color-scheme: light dark;
-=======
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
 
->>>>>>> varukorg-layout
   color: rgba(255, 255, 255, 0.87);
 
   -webkit-font-smoothing: antialiased;
@@ -15,16 +11,7 @@
 
 body {
   margin: 0;
-<<<<<<< HEAD
-  display: flex;
-  justify-content: center;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  font-family: 'Barlow Condensed', sans-serif;
-=======
   padding: 0;
->>>>>>> varukorg-layout
 }
 
 h1 {
@@ -60,6 +47,7 @@ button:focus-visible {
 }
 
 .info {
+  color: inherit;
   text-decoration: underline;
 }
 
