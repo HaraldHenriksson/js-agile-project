@@ -47,6 +47,7 @@ button:focus-visible {
 }
 
 .info {
+  color: inherit;
   text-decoration: underline;
 }
 
