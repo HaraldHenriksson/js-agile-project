@@ -15,8 +15,8 @@ const getProducts = async () => {
   
   productsCard = await fetchProducts()
   if (productsCard.length > 0){
-      console.log(productsCard)
 
+console.log(productsCard);
 
       //Rendering av produkter
     renderProducts(productsCard);
@@ -38,11 +38,11 @@ function renderProducts(array:products[]) {
         <img src="https://www.bortakvall.se/${product.images.thumbnail}" alt="product">
         <h1 class="name">${product.name}</h1>
         <p class="price">${product.price}kr</p>
-        <a href="" class="info">More info</a>
-        <div class="card d-none">
+        <button class="info" data-id="${product.id}">More info</button>
+        <div id="${product.id}" class="card-inner d-none">
       <div class="card-body">
-        <h5 class="card-title">En mix av lakrits och gelé med fruktsmak</h5>
-        <p class="card-text">Innehållsförteckning: Socker, glukossirap, glukos-fruktossirap, stärkelse, VETEMJÖL, melass, syra (citronsyra), fuktighetsbevarande medel (sorbitoler, glycerol), lakritsextrakt, salt, vegetabiliska oljor (kokos, palm), aromer, färgämnen (E153, E120, E100, E141), ytbehandlingsmedel (bivax), stabiliseringsmedel (E471)</p>
+        ${product.description}
+      </div>
     </div>
     </div>
         <p><button class="button" data-id="${product.id}">Add to Cart</button></p>
@@ -50,11 +50,41 @@ function renderProducts(array:products[]) {
       
 		`)).join('')
 		
-    document.querySelector('.button')?.addEventListener('click', (e) => {
-      e.defaultPrevented
-      console.log();
-      
+// type of "function" that target the product and displays its description with toggle effect
+    const infoBtns = document.querySelectorAll('.info')
+    console.log(infoBtns);
+    infoBtns.forEach((btn) => {
+
+      btn.addEventListener('click', (e) => {
+
+        const target = e.target as HTMLElement
+        const productId = parseInt(target.dataset.id!)
+        const infos = document.querySelectorAll('.card-inner')
+        
+        infos!.forEach((info) => {
+        if (parseInt(info.id)=== productId){
+          info.classList.toggle('d-none')
+          }
+        })
+      })
+    })
+
+
+   
+  
+
+
+
+
+document.querySelector('#mInfo')?.addEventListener('click', (e) => {
+  console.log('hej');
+  const target = e.target as HTMLElement
+  console.log(target.dataset);
+  
+  document.querySelector('.mInfo')?.classList.toggle('d-none') 
+  
   })
+    
 }
 
 // Open Cart
