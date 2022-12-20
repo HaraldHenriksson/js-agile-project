@@ -44,9 +44,10 @@ function renderProducts(array:products[]) {
         <h5 class="card-title">En mix av lakrits och gelé med fruktsmak</h5>
         <p class="card-text">Innehållsförteckning: Socker, glukossirap, glukos-fruktossirap, stärkelse, VETEMJÖL, melass, syra (citronsyra), fuktighetsbevarande medel (sorbitoler, glycerol), lakritsextrakt, salt, vegetabiliska oljor (kokos, palm), aromer, färgämnen (E153, E120, E100, E141), ytbehandlingsmedel (bivax), stabiliseringsmedel (E471)</p>
     </div>
+    </div>
         <p><button class="button" data-id="${product.id}">Add to Cart</button></p>
       </div>
-      </div>
+      
 		`)).join('')
 		
     document.querySelector('.button')?.addEventListener('click', (e) => {
