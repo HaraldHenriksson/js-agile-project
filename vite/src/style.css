@@ -15,8 +15,12 @@ body {
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 1.5em;
   line-height: 1.1;
+}
+
+main {
+  padding: 2em;
 }
 
 .card {
@@ -36,6 +40,7 @@ button {
   padding: 0.6em 1.2em;
   background-color: #b8a11d;
   transition: border-color 0.25s;
+  width: 100%;
 }
 button:hover {
   border-color: #111116;
@@ -60,8 +65,8 @@ button:focus-visible {
 }
 
 img {
-  height: 200px;
-  width: 200px;
+  height: auto;
+  width: 100%;
 }
 
 .card-body {
