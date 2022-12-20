@@ -34,7 +34,6 @@ function renderProducts(array:products[]) {
 
 	document.querySelector('.grid-container')!.innerHTML = array
 		.map(product=> (`
-    <div class="card-grid">
         <div class="card">
         <img src="https://www.bortakvall.se/${product.images.thumbnail}" alt="product">
         <h1 class="name">${product.name}</h1>
@@ -44,8 +43,6 @@ function renderProducts(array:products[]) {
       <div class="card-body">
         <h5 class="card-title">En mix av lakrits och gelé med fruktsmak</h5>
         <p class="card-text">Innehållsförteckning: Socker, glukossirap, glukos-fruktossirap, stärkelse, VETEMJÖL, melass, syra (citronsyra), fuktighetsbevarande medel (sorbitoler, glycerol), lakritsextrakt, salt, vegetabiliska oljor (kokos, palm), aromer, färgämnen (E153, E120, E100, E141), ytbehandlingsmedel (bivax), stabiliseringsmedel (E471)</p>
-
-      </div>
     </div>
         <p><button class="button" data-id="${product.id}">Add to Cart</button></p>
       </div>
