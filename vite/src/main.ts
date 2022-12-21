@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import './style.css'
 import { fetchProducts } from './api'
 import { products } from './interface'
+import { post } from './api'
 
 
 //lokal variabel som innehåller alla produkter från server
@@ -157,8 +158,6 @@ document.querySelector('.cart-close')!.addEventListener('click', () => {
     document.querySelector('#arrow')!.classList.add('d-none')
 })
 
-
-
-
-
-
+document.querySelector('#submit')!.addEventListener('click', () => {
+  post()
+})
