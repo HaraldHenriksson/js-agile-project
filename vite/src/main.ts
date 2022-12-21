@@ -41,6 +41,8 @@ function renderProducts(array:products[]) {
         <button class="info" data-id="${product.id}">More info</button>
         <div id="${product.id}" class="card-inner d-none">
       <div class="card-body">
+        <h1 class="name">${product.name}</h1>
+        <p class="price">${product.price}kr</p>
         ${product.description}
       </div>
       </div>

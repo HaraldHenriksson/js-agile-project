@@ -70,8 +70,23 @@ img {
 }
 
 .card-body {
-  position: absolute;
+  /* was absolute! */
+  position: relative; 
   background-color: white;
+  
+}
+
+ /* pop up background */
+.card-inner {
+
+  background: rgba(0,0,0,0.5);
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left:0;
+  width: 100%;
+  height:100%;
+ 
 }
 
 .add, .remove {
