@@ -39,11 +39,13 @@ button {
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   background-color: #b8a11d;
-  transition: border-color 0.25s;
+  transition: all 0.2s ease-in-out;
   width: 100%;
 }
 button:hover {
   border-color: #111116;
+  transform: scale(1.1);  
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 button:focus,
 button:focus-visible {
