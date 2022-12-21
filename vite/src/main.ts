@@ -69,15 +69,18 @@ function renderProducts(array:products[]) {
         })
       })
     })
-
-
    
   document.querySelector('#checkout')?.addEventListener('click', () => {
     document.querySelector('.contact-form')!.classList.remove('d-none')
     document.querySelector('#checkout')!.classList.add('d-none')
+    document.querySelector('#arrow')!.classList.remove('d-none')
   })
 
-
+  document.querySelector('#arrow')?.addEventListener('click', () => {
+    document.querySelector('.contact-form')!.classList.add('d-none')
+    document.querySelector('#checkout')!.classList.remove('d-none')
+    document.querySelector('#arrow')!.classList.add('d-none')
+  })
 
 
 document.querySelector('#mInfo')?.addEventListener('click', (e) => {
@@ -101,6 +104,7 @@ document.querySelector('.cart-close')!.addEventListener('click', () => {
     document.querySelector('.cart-container')!.classList.add('d-none')
     document.querySelector('.contact-form')!.classList.add('d-none')
     document.querySelector('#checkout')!.classList.remove('d-none')
+    document.querySelector('#arrow')!.classList.add('d-none')
 })
 
 

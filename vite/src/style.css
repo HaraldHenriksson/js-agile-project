@@ -174,3 +174,13 @@ img {
   font-size: 28px;
   cursor: pointer;
 }
+
+.material-symbols-outlined {
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.form-group {
+  margin-bottom: 1%;
+}
