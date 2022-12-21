@@ -26,9 +26,9 @@ export const post = async (person: newData[]) => {
     })
   
     if (!res.ok) {
-        console.log('Error, något väldigt FEL')
+        alert('Something went wrong, try again later')
       throw new Error(`${res.status} ${res.statusText}`)
     }
-    console.log(res, "Post fungerar")
+    alert('Successful!🥳 Thank you for you purchase')
     return await res.json() as newData
   }
