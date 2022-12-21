@@ -17,19 +17,16 @@
       <div class="container-fluid header-container">
         <div class="container header d-flex justify-content-end align-items-center">
           <span class="material-symbols-outlined cart-icon">shopping_cart</span>
-          <span class="cart-item-number">3</span>
+          <span class="cart-item-number">0</span>
         </div>
       </div>
     </header>
     <main>
-      <div class="grid-container"></div>
-      <!-- <div class="card">
-        <img src="https://plus.unsplash.com/premium_photo-1663839539482-001199704e08?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="product">
-        <h1 class="name">Product name</h1>
-        <p class="price">56kr</p>
-        <a href="" class="info">More info</a>
-        <p><button>Add to Cart</button></p>
-      </div> -->
+      <div class="container-lg">
+        <div class="grid-container">
+        <!-- Products -->
+        </div>
+      </div>
     </main>
 
     <!-- Start: Varukorg - Centrerad modal för varukorgen -->
@@ -51,36 +48,43 @@
             <th scope="col"><!-- Ta bort --></th>
           </tr>
           </thead>
-          <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td><img src="https://www.bortakvall.se/storage/products/thumbnails/173459-300x300.png" class="img-fluid rounded cart-image" alt="Jättenappar Frukt"></td>
-            <td>Jättenappar Frukt</td>
-            <td><span class="add">+</span> 1 <span class="remove">-</span></td>
-            <td>7 sek</td>
-            <td>7 sek</td>
-            <td><span class="material-symbols-outlined trash">delete</span></td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td><img src="https://www.bortakvall.se/storage/products/thumbnails/200422-300x300.png" class="img-fluid rounded cart-image" alt="Kinder Maxi"></td>
-            <td>Kinder Maxi</td>
-            <td><span class="add">+</span> 3 <span class="remove">-</span></td>
-            <td>10 sek</td>
-            <td>30 sek</td>
-            <td><span class="material-symbols-outlined trash">delete</span></td>
-          </tr>
-          <tr>
-            <td colspan="4"></td>
-            <td>Att betala</td>
-            <td><strong>37 sek</strong></td>
-            <td></td>
-          </tr>
+          <tbody id="itemcollection">
+          <!-- Product items in cart -->
           </tbody>
         </table>
-        <button class="btn btn-primary">Gå till kassan</button>
-      </div>
+        <button id="checkout" class="btn btn-primary">Gå till kassan</button>
+       <a href="#"><span id="arrow" class="material-symbols-outlined d-none">
+        arrow_upward
+        </span></a>
+      <form class="contact-form d-none">
+        <div class="form-group">
+          <label>Namn</label>
+          <input type="text" class="form-control" placeholder="Förnamn Efternamn" required>
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" class="form-control" placeholder="Adress" required>
+        </div>
+        <div class="form-group">
+          <label>Postnummer</label>
+          <input type="text" class="form-control" placeholder="Postnummer" required>
+        </div>
+        <div class="form-group">
+          <label>Stad</label>
+          <input type="text" class="form-control" placeholder="Stad" required>
+        </div>
+        <div class="form-group">
+          <label>Telefonnummer</label>
+          <input type="text" class="form-control" placeholder="Telefonnummer">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" class="form-control" placeholder="exempel@exempel.se" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Skicka och lägg beställning</button>
+      </form>
     </div>
+      </div>
     <!-- Varukorg slut -->
 
     <footer></footer>

@@ -16,7 +16,7 @@ const getProducts = async () => {
   productsCard = await fetchProducts()
   if (productsCard.length > 0){
 
-console.log(productsCard);
+console.log("Samtliga produkter", productsCard);
 
       //Rendering av produkter
     renderProducts(productsCard);
@@ -48,7 +48,7 @@ function renderProducts(array:products[]) {
         ${product.description}
       </div>
       </div>
-      <p><button class="button" data-id="${product.id}">Add to Cart</button></p>
+      <button class="button" data-idcart="${product.id}">Add to Cart</button>
     </div>
     </div>
    
@@ -80,19 +80,32 @@ function renderProducts(array:products[]) {
 
     // attempt to make popup close by clicking outside och pop up
     popUp.forEach((pop) => {
-
+      
 
       pop?.addEventListener('click', (e) => {
         const target = e.target as HTMLElement
-        console.log(target);
-    
-        if (target === pop ){
+        const close = document.querySelector('.popup-close')
+        if (target === pop || close ){
           pop?.classList.toggle('d-none')
         }
       })
     })
   
   
+   
+  document.querySelector('#checkout')?.addEventListener('click', () => {
+    document.querySelector('.contact-form')!.classList.remove('d-none')
+    document.querySelector('#checkout')!.classList.add('d-none')
+    document.querySelector('#arrow')!.classList.remove('d-none')
+  })
+
+  document.querySelector('#arrow')?.addEventListener('click', () => {
+    document.querySelector('.contact-form')!.classList.add('d-none')
+    document.querySelector('#checkout')!.classList.remove('d-none')
+    document.querySelector('#arrow')!.classList.add('d-none')
+  })
+
+
 document.querySelector('#mInfo')?.addEventListener('click', (e) => {
   console.log('hej');
   const target = e.target as HTMLElement
@@ -102,31 +115,84 @@ document.querySelector('#mInfo')?.addEventListener('click', (e) => {
   
   })
 
+    //Checks if there is products in local storage and then prints out the number.
+    document.querySelector('.cart-item-number')!.innerHTML = `${cartItemData.length}`
+}
 
-  // const popUp = document.querySelector('.card-inner')
-  
-  // popUp?.addEventListener('click', (e) => {
+// Add to cart button
+const getJson = localStorage.getItem('products') ?? '[]'
+const cartItemData:any[] = JSON.parse(getJson)
 
-  //   const target = e.target as HTMLElement
-  //   const div = "DIV" as string
-  //   console.log(target);
+document.querySelector('.grid-container')!.addEventListener('click', (e) => {
+    const target = e.target as HTMLButtonElement
+    if(target.dataset.idcart) {
+        let selectedItem = productsCard ? productsCard.filter(post => {
+            return post.id === Number(target.dataset.idcart)
+        }) : null
+        cartItemData.push({ 
+            id: selectedItem![0].id,
+            name: selectedItem![0].name,
+            description: selectedItem![0].description,
+            price: selectedItem![0].price,
+            image: selectedItem![0].images.thumbnail,
+            selected: 1 // Hur många produkter kunder väljer
+        })
+        saveItem()
+    }
+})
 
+// Select the itemcollection div element for the cart
+const itemCollection = document.querySelector('#itemcollection')! as HTMLDivElement
 
-  //   if (target ===popUp) {
-  //     popUp?.classList.toggle('d-none')
-  //   }
-  // })
-    
+// Delete product in cart through trashcan
+itemCollection.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement
+    if(target.classList.contains('trash')) {
+        const index = cartItemData.findIndex(item => item.id === Number(target.dataset.itemid))
+        cartItemData.splice(index, 1)
+        saveItem()
+    }
+})
+
+// Save product to local storage
+let jsonItem = ``
+const saveItem = () => {
+    jsonItem = JSON.stringify(cartItemData)
+    localStorage.setItem('products', jsonItem)
+    document.querySelector('.cart-item-number')!.innerHTML = `${cartItemData.length}`
+    viewCart()
+}
+
+//Render cart with products
+const viewCart = () => {
+    let productCounter = 1
+    itemCollection.innerHTML = cartItemData.map(product => `
+       <tr>
+        <th scope="row">${productCounter++}</th>
+        <td><img src="https://www.bortakvall.se/${product.image}" class="img-fluid rounded cart-image" alt="${product.name}"></td>
+        <td>${product.name}</td>
+        <td><span class="add">+</span> ${product.selected} <span class="remove">-</span></td>
+        <td>${product.price}</td>
+        <td>${product.price * product.selected}</td>
+        <td class="delete-item"><span class="material-symbols-outlined trash" data-itemid="${product.id}">delete</span></td>
+    </tr>
+    `).join('')
 }
 
 // Open Cart
 document.querySelector('.cart-icon')!.addEventListener('click', () => {
     document.querySelector('.cart-container')!.classList.remove('d-none')
+
+    // Render the cart view
+    viewCart()
 })
 
 // Close cart
 document.querySelector('.cart-close')!.addEventListener('click', () => {
     document.querySelector('.cart-container')!.classList.add('d-none')
+    document.querySelector('.contact-form')!.classList.add('d-none')
+    document.querySelector('#checkout')!.classList.remove('d-none')
+    document.querySelector('#arrow')!.classList.add('d-none')
 })
 
 
