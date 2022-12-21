@@ -3,6 +3,7 @@ import './style.css'
 import { fetchProducts } from './api'
 import { products } from './interface'
 import { post } from './api'
+import { newData } from './interface'
 
 
 //lokal variabel som innehåller alla produkter från server
@@ -158,6 +159,50 @@ document.querySelector('.cart-close')!.addEventListener('click', () => {
     document.querySelector('#arrow')!.classList.add('d-none')
 })
 
-document.querySelector('#submit')!.addEventListener('click', () => {
-  post()
+let person: newData[] = []
+
+// person = [{
+//     customer_first_name: "harald",
+//     customer_last_name: "henriksson",
+//     customer_address: "kajgatan",
+//     customer_postcode: 23440,
+//     customer_city: "lomma",
+//     customer_email: "harald@espinagar.se",
+//     order_total: 53,
+//     order_items: {
+//         product_id: 9,
+//         qty: 11,
+//     }
+// }]
+
+document.querySelector('#submit')!.addEventListener('submit', async e => {
+  e.preventDefault()
+  //post(person)
+
+  const firstName = document.querySelector<HTMLInputElement>('#newFirstName')?.value
+  const lastName = document.querySelector<HTMLInputElement>('#newLastName')?.value
+  const adress = document.querySelector<HTMLInputElement>('#newAdress')?.value
+  const postalNumber = document.querySelector<HTMLInputElement>('#newPostalNumber')?.value
+  const city = document.querySelector<HTMLInputElement>('#newCity')?.value
+  const phoneNumber = document.querySelector<HTMLInputElement>('#newPhoneNumber')?.value
+  const email = document.querySelector<HTMLInputElement>('#newEmail')?.value
+
+  console.log(firstName, lastName, adress, postalNumber, city, phoneNumber, email)
+
+  const person: newData = [{
+    customer_first_name: firstName,
+    customer_last_name: lastName,
+    customer_address: adress,
+    customer_postcode:postalNumber,
+    customer_city: city,
+    customer_email: email,
+    order_total: 53,
+    order_items: {
+               product_id: 9,
+               qty: 11,
+           }
+  }]
+
+  await post(person)
 })
+
