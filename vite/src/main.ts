@@ -41,6 +41,8 @@ function renderProducts(array:products[]) {
         <button class="info" data-id="${product.id}">More info</button>
         <div id="${product.id}" class="card-inner d-none">
       <div class="card-body">
+      <div class="popup-close">X</div>
+      <img src="https://www.bortakvall.se/${product.images.thumbnail}" class="thumbnail-img" alt="product">
         <h1 class="name">${product.name}</h1>
         <p class="price">${product.price}kr</p>
         ${product.description}
@@ -72,13 +74,25 @@ function renderProducts(array:products[]) {
       })
     })
 
+    // pop close when clicking outside of div
+    const popUp = document.querySelectorAll('.card-inner')
 
-   
+
+    // attempt to make popup close by clicking outside och pop up
+    popUp.forEach((pop) => {
+
+
+      pop?.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement
+        console.log(target);
+    
+        if (target === pop ){
+          pop?.classList.toggle('d-none')
+        }
+      })
+    })
   
-
-
-
-
+  
 document.querySelector('#mInfo')?.addEventListener('click', (e) => {
   console.log('hej');
   const target = e.target as HTMLElement
@@ -87,6 +101,21 @@ document.querySelector('#mInfo')?.addEventListener('click', (e) => {
   document.querySelector('.mInfo')?.classList.toggle('d-none') 
   
   })
+
+
+  // const popUp = document.querySelector('.card-inner')
+  
+  // popUp?.addEventListener('click', (e) => {
+
+  //   const target = e.target as HTMLElement
+  //   const div = "DIV" as string
+  //   console.log(target);
+
+
+  //   if (target ===popUp) {
+  //     popUp?.classList.toggle('d-none')
+  //   }
+  // })
     
 }
 

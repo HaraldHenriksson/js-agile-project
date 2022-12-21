@@ -89,6 +89,18 @@ img {
  
 }
 
+.popup-close{
+
+  position: absolute;
+  margin-top: 5px;
+  right: 8px;
+  cursor: pointer;
+}
+
+.thumbnail-img{
+  width: 300px;
+  height: auto;
+}
 .add, .remove {
   display: inline-flex;
   flex-direction: row;
