@@ -73,29 +73,8 @@ function renderProducts(array:products[]) {
 
    
   document.querySelector('#checkout')?.addEventListener('click', () => {
-    document.querySelector('#checkout')!.innerHTML = `<form>
-    <div class="form-group">
-      <label for="firstName">First Name</label>
-      <input type="text" class="form-control" id="firstName" aria-describedby="firstNameHelp" placeholder="Enter first name">
-      <small id="firstNameHelp" class="form-text text-muted"></small>
-    </div>
-    <div class="form-group">
-      <label for="lastName">Last Name</label>
-      <input type="text" class="form-control" id="lastName" aria-describedby="lastNameHelp" placeholder="Enter last name">
-      <small id="lastNameHelp" class="form-text text-muted"></small>
-    </div>
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
-      <small id="emailHelp" class="form-text text-muted"></small>
-    </div>
-    <div class="form-group">
-      <label for="phoneNumber">Phone Number</label>
-      <input type="text" class="form-control" id="phoneNumber" aria-describedby="phoneNumberHelp" placeholder="Enter phone number">
-      <small id="phoneNumberHelp" class="form-text text-muted"></small>
-    </div>
-    <button type="submit" class="btn btn-primary">Purchase</button>
-  </form>`
+    document.querySelector('.contact-form')!.classList.remove('d-none')
+    document.querySelector('#checkout')!.classList.add('d-none')
   })
 
 
@@ -120,6 +99,8 @@ document.querySelector('.cart-icon')!.addEventListener('click', () => {
 // Close cart
 document.querySelector('.cart-close')!.addEventListener('click', () => {
     document.querySelector('.cart-container')!.classList.add('d-none')
+    document.querySelector('.contact-form')!.classList.add('d-none')
+    document.querySelector('#checkout')!.classList.remove('d-none')
 })
 
 
