@@ -92,8 +92,6 @@ function renderProducts(array:products[]) {
       })
     })
   
-  
-   
   document.querySelector('#checkout')?.addEventListener('click', () => {
     document.querySelector('.contact-form')!.classList.remove('d-none')
     document.querySelector('#checkout')!.classList.add('d-none')
