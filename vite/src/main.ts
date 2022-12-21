@@ -74,18 +74,19 @@ function renderProducts(array:products[]) {
       })
     })
 
-    // pop close when clicking outside of div
+    // pop close when clicking outside of div and "X"
     const popUp = document.querySelectorAll('.card-inner')
+    const close = document.querySelectorAll('.popup-close')
 
-
-    // attempt to make popup close by clicking outside och pop up
-    popUp.forEach((pop) => {
-      
-
+    popUp.forEach((pop, index) => {
       pop?.addEventListener('click', (e) => {
         const target = e.target as HTMLElement
-        const close = document.querySelector('.popup-close')
-        if (target === pop || close ){
+      
+        if (target === close[index]){
+          pop?.classList.toggle('d-none')
+        }
+        
+        if (target === pop){
           pop?.classList.toggle('d-none')
         }
       })
