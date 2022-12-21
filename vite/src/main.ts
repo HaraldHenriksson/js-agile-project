@@ -6,11 +6,11 @@ import { post } from './api'
 import { newData } from './interface'
 
 
+
+
 //lokal variabel som innehåller alla produkter från server
 let productsCard: products[] = []
 
-// test för att få eventlistener att fungerar på rederad data
-// let isRend = false
 
 //Hämtning av produkter från API
 const getProducts = async () => {
@@ -22,7 +22,7 @@ console.log("Samtliga produkter", productsCard);
 
       //Rendering av produkter
     renderProducts(productsCard);
-
+    document.querySelector('.productsQty')!.innerHTML = `Vi har sjukt nog  ${productsCard.length} olika sorters godis, fräckt!`
     // test för att få eventlistener att fungerar på rederad data
     // isRend = true
     }
@@ -30,6 +30,11 @@ console.log("Samtliga produkter", productsCard);
 
 
 getProducts()
+
+
+
+
+
 
 //rendering av produkter på main sida
 function renderProducts(array:products[]) {
