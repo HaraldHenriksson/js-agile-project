@@ -16,7 +16,7 @@ const getProducts = async () => {
   productsCard = await fetchProducts()
   if (productsCard.length > 0){
 
-console.log(productsCard);
+console.log("Samtliga produkter", productsCard);
 
       //Rendering av produkter
     renderProducts(productsCard);
@@ -44,7 +44,7 @@ function renderProducts(array:products[]) {
         ${product.description}
       </div>
       </div>
-      <p><button class="button" data-id="${product.id}">Add to Cart</button></p>
+      <button class="button" data-id="${product.id}">Add to Cart</button>
     </div>
     </div>
    
@@ -109,12 +109,62 @@ document.querySelector('#mInfo')?.addEventListener('click', (e) => {
   document.querySelector('.mInfo')?.classList.toggle('d-none') 
   
   })
-    
+
+}
+
+// Add to cart button
+// 1. - X - När man klickar på knappen "Add to cart" ska produkt data sparas ner som objekt i en array
+// 2. - X - Arrayen görs om till en JSON-string och sparas local-storage
+// 3. Hämta data till varukorgen genom att läsa från Local-storage och sedan göra om det till Array-objekt.
+const getJson = localStorage.getItem('products') ?? '[]'
+const cartItemData:any[] = JSON.parse(getJson)
+
+document.querySelector('.grid-container')!.addEventListener('click', (e) => {
+    const target = e.target as HTMLButtonElement
+    if(target.dataset.id) {
+        let selectedItem = productsCard ? productsCard.filter(post => {
+            return post.id === Number(target.dataset.id)
+        }) : null
+        cartItemData.push({
+            id: selectedItem![0].id,
+            name: selectedItem![0].name,
+            description: selectedItem![0].description,
+            price: selectedItem![0].price,
+            image: selectedItem![0].images.thumbnail,
+            selected: 1 // Hur många produkter kunder väljer
+        })
+        saveItem()
+    }
+})
+
+// Save product to local storage
+let jsonItem = ``
+const saveItem = () => {
+    jsonItem = JSON.stringify(cartItemData)
+    localStorage.setItem('products', jsonItem)
+    document.querySelector('.cart-item-number')!.innerHTML = `${cartItemData.length}`
+}
+
+//Render cart with products
+const viewCart = () => {
+    let productCounter = 1
+    document.querySelector('#itemcollection')!.innerHTML = cartItemData.map(product => `
+       <tr>
+        <th scope="row">${productCounter++}</th>
+        <td><img src="https://www.bortakvall.se/${product.image}" class="img-fluid rounded cart-image" alt="${product.name}"></td>
+        <td>${product.name}</td>
+        <td><span class="add">+</span> ${product.selected} <span class="remove">-</span></td>
+        <td>${product.price}</td>
+        <td>${product.price * product.selected}</td>
+        <td><span class="material-symbols-outlined trash">delete</span></td>
+    </tr>
+    `).join('')
 }
 
 // Open Cart
 document.querySelector('.cart-icon')!.addEventListener('click', () => {
     document.querySelector('.cart-container')!.classList.remove('d-none')
+    viewCart()
 })
 
 // Close cart

@@ -17,7 +17,7 @@
       <div class="container-fluid header-container">
         <div class="container header d-flex justify-content-end align-items-center">
           <span class="material-symbols-outlined cart-icon">shopping_cart</span>
-          <span class="cart-item-number">3</span>
+          <span class="cart-item-number">0</span>
         </div>
       </div>
     </header>
@@ -51,31 +51,8 @@
             <th scope="col"><!-- Ta bort --></th>
           </tr>
           </thead>
-          <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td><img src="https://www.bortakvall.se/storage/products/thumbnails/173459-300x300.png" class="img-fluid rounded cart-image" alt="Jättenappar Frukt"></td>
-            <td>Jättenappar Frukt</td>
-            <td><span class="add">+</span> 1 <span class="remove">-</span></td>
-            <td>7 sek</td>
-            <td>7 sek</td>
-            <td><span class="material-symbols-outlined trash">delete</span></td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td><img src="https://www.bortakvall.se/storage/products/thumbnails/200422-300x300.png" class="img-fluid rounded cart-image" alt="Kinder Maxi"></td>
-            <td>Kinder Maxi</td>
-            <td><span class="add">+</span> 3 <span class="remove">-</span></td>
-            <td>10 sek</td>
-            <td>30 sek</td>
-            <td><span class="material-symbols-outlined trash">delete</span></td>
-          </tr>
-          <tr>
-            <td colspan="4"></td>
-            <td>Att betala</td>
-            <td><strong>37 sek</strong></td>
-            <td></td>
-          </tr>
+          <tbody id="itemcollection">
+          <!-- Product items in cart -->
           </tbody>
         </table>
         <button id="checkout" class="btn btn-primary">Gå till kassan</button>
