@@ -43,10 +43,14 @@ function renderProducts(array:products[]) {
         <button class="info" data-id="${product.id}">More info</button>
         <div id="${product.id}" class="card-inner d-none">
       <div class="card-body">
+      <div class="popup-close">X</div>
+      <img src="https://www.bortakvall.se/${product.images.thumbnail}" class="thumbnail-img" alt="product">
+        <h1 class="name">${product.name}</h1>
+        <p class="price">${product.price}kr</p>
         ${product.description}
       </div>
       </div>
-      <button class="button" data-id="${product.id}">Add to Cart</button>
+      <button class="button" data-idcart="${product.id}">Add to Cart</button>
     </div>
     </div>
    
@@ -71,7 +75,25 @@ function renderProducts(array:products[]) {
         })
       })
     })
-   
+
+    // pop close when clicking outside of div and "X"
+    const popUp = document.querySelectorAll('.card-inner')
+    const close = document.querySelectorAll('.popup-close')
+
+    popUp.forEach((pop, index) => {
+      pop?.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement
+      
+        if (target === close[index]){
+          pop?.classList.toggle('d-none')
+        }
+        
+        if (target === pop){
+          pop?.classList.toggle('d-none')
+        }
+      })
+    })
+  
   document.querySelector('#checkout')?.addEventListener('click', () => {
     document.querySelector('.contact-form')!.classList.remove('d-none')
     document.querySelector('#checkout')!.classList.add('d-none')
@@ -94,22 +116,21 @@ document.querySelector('#mInfo')?.addEventListener('click', (e) => {
   
   })
 
+    //Checks if there is products in local storage and then prints out the number.
+    document.querySelector('.cart-item-number')!.innerHTML = `${cartItemData.length}`
 }
 
 // Add to cart button
-// 1. - X - När man klickar på knappen "Add to cart" ska produkt data sparas ner som objekt i en array
-// 2. - X - Arrayen görs om till en JSON-string och sparas local-storage
-// 3. Hämta data till varukorgen genom att läsa från Local-storage och sedan göra om det till Array-objekt.
 const getJson = localStorage.getItem('products') ?? '[]'
 const cartItemData:any[] = JSON.parse(getJson)
 
 document.querySelector('.grid-container')!.addEventListener('click', (e) => {
     const target = e.target as HTMLButtonElement
-    if(target.dataset.id) {
+    if(target.dataset.idcart) {
         let selectedItem = productsCard ? productsCard.filter(post => {
-            return post.id === Number(target.dataset.id)
+            return post.id === Number(target.dataset.idcart)
         }) : null
-        cartItemData.push({
+        cartItemData.push({ 
             id: selectedItem![0].id,
             name: selectedItem![0].name,
             description: selectedItem![0].description,
@@ -121,18 +142,32 @@ document.querySelector('.grid-container')!.addEventListener('click', (e) => {
     }
 })
 
+// Select the itemcollection div element for the cart
+const itemCollection = document.querySelector('#itemcollection')! as HTMLDivElement
+
+// Delete product in cart through trashcan
+itemCollection.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement
+    if(target.classList.contains('trash')) {
+        const index = cartItemData.findIndex(item => item.id === Number(target.dataset.itemid))
+        cartItemData.splice(index, 1)
+        saveItem()
+    }
+})
+
 // Save product to local storage
 let jsonItem = ``
 const saveItem = () => {
     jsonItem = JSON.stringify(cartItemData)
     localStorage.setItem('products', jsonItem)
     document.querySelector('.cart-item-number')!.innerHTML = `${cartItemData.length}`
+    viewCart()
 }
 
 //Render cart with products
 const viewCart = () => {
     let productCounter = 1
-    document.querySelector('#itemcollection')!.innerHTML = cartItemData.map(product => `
+    itemCollection.innerHTML = cartItemData.map(product => `
        <tr>
         <th scope="row">${productCounter++}</th>
         <td><img src="https://www.bortakvall.se/${product.image}" class="img-fluid rounded cart-image" alt="${product.name}"></td>
@@ -140,7 +175,7 @@ const viewCart = () => {
         <td><span class="add">+</span> ${product.selected} <span class="remove">-</span></td>
         <td>${product.price}</td>
         <td>${product.price * product.selected}</td>
-        <td><span class="material-symbols-outlined trash">delete</span></td>
+        <td class="delete-item"><span class="material-symbols-outlined trash" data-itemid="${product.id}">delete</span></td>
     </tr>
     `).join('')
 }
@@ -148,6 +183,8 @@ const viewCart = () => {
 // Open Cart
 document.querySelector('.cart-icon')!.addEventListener('click', () => {
     document.querySelector('.cart-container')!.classList.remove('d-none')
+
+    // Render the cart view
     viewCart()
 })
 
