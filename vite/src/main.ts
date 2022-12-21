@@ -175,7 +175,7 @@ let person: newData[] = []
 //     }
 // }]
 
-document.querySelector('#submit')!.addEventListener('submit', async e => {
+document.querySelector('#submit')!.addEventListener('click', async e => {
   e.preventDefault()
   //post(person)
 
@@ -184,12 +184,12 @@ document.querySelector('#submit')!.addEventListener('submit', async e => {
   const adress = document.querySelector<HTMLInputElement>('#newAdress')?.value
   const postalNumber = document.querySelector<HTMLInputElement>('#newPostalNumber')?.value
   const city = document.querySelector<HTMLInputElement>('#newCity')?.value
-  const phoneNumber = document.querySelector<HTMLInputElement>('#newPhoneNumber')?.value
+  //const phoneNumber = document.querySelector<HTMLInputElement>('#newPhoneNumber')?.value
   const email = document.querySelector<HTMLInputElement>('#newEmail')?.value
 
-  console.log(firstName, lastName, adress, postalNumber, city, phoneNumber, email)
+  //console.log(firstName, lastName, adress, postalNumber, city, phoneNumber, email)
 
-  const person: newData = [{
+  const person = {
     customer_first_name: firstName,
     customer_last_name: lastName,
     customer_address: adress,
@@ -201,7 +201,8 @@ document.querySelector('#submit')!.addEventListener('submit', async e => {
                product_id: 9,
                qty: 11,
            }
-  }]
+  }
+  console.log(person)
 
   await post(person)
 })
