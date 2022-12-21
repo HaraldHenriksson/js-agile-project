@@ -41,10 +41,14 @@ function renderProducts(array:products[]) {
         <button class="info" data-id="${product.id}">More info</button>
         <div id="${product.id}" class="card-inner d-none">
       <div class="card-body">
+      <div class="popup-close">X</div>
+      <img src="https://www.bortakvall.se/${product.images.thumbnail}" class="thumbnail-img" alt="product">
+        <h1 class="name">${product.name}</h1>
+        <p class="price">${product.price}kr</p>
         ${product.description}
       </div>
       </div>
-      <button class="button" data-id="${product.id}">Add to Cart</button>
+      <button class="button" data-idcart="${product.id}">Add to Cart</button>
     </div>
     </div>
    
@@ -69,7 +73,25 @@ function renderProducts(array:products[]) {
         })
       })
     })
-   
+
+    // pop close when clicking outside of div and "X"
+    const popUp = document.querySelectorAll('.card-inner')
+    const close = document.querySelectorAll('.popup-close')
+
+    popUp.forEach((pop, index) => {
+      pop?.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement
+      
+        if (target === close[index]){
+          pop?.classList.toggle('d-none')
+        }
+        
+        if (target === pop){
+          pop?.classList.toggle('d-none')
+        }
+      })
+    })
+  
   document.querySelector('#checkout')?.addEventListener('click', () => {
     document.querySelector('.contact-form')!.classList.remove('d-none')
     document.querySelector('#checkout')!.classList.add('d-none')
@@ -102,11 +124,11 @@ const cartItemData:any[] = JSON.parse(getJson)
 
 document.querySelector('.grid-container')!.addEventListener('click', (e) => {
     const target = e.target as HTMLButtonElement
-    if(target.dataset.id) {
+    if(target.dataset.idcart) {
         let selectedItem = productsCard ? productsCard.filter(post => {
-            return post.id === Number(target.dataset.id)
+            return post.id === Number(target.dataset.idcart)
         }) : null
-        cartItemData.push({
+        cartItemData.push({ 
             id: selectedItem![0].id,
             name: selectedItem![0].name,
             description: selectedItem![0].description,
