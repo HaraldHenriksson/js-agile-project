@@ -4,6 +4,7 @@ import { fetchProducts } from './api'
 import { products } from './interface'
 import { post } from './api'
 import { newData } from './interface'
+import { order_items } from './interface'
 
 
 
@@ -128,7 +129,6 @@ document.querySelector('#mInfo')?.addEventListener('click', (e) => {
 // Add to cart button
 const getJson = localStorage.getItem('products') ?? '[]'
 const cartItemData:any[] = JSON.parse(getJson)
-let qty:number = 0
 
 document.querySelector('.grid-container')!.addEventListener('click', (e) => {
     const target = e.target as HTMLButtonElement
@@ -274,39 +274,35 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
 
   const cartToSend = localStorage.getItem('products')
   const finalCart = JSON.parse(cartToSend!!)
-  const indexTest = finalCart.findIndex(item => item.selected)
-  const idIndex = finalCart.findIndex(item => item.id)
-  const priceIndex = finalCart.findIndex(item => item.price)
-  let totalProduct = finalCart[priceIndex].price * finalCart[idIndex].selected
 
-  let objects = {
-                  product_id: undefined,
-                   qty:undefined,
-                   item_price:undefined,
-                   item_total:undefined,
-  }
-
-  const newArray = []
+  const newArray: order_items[] = []
+  console.log(finalCart);
   
-finalCart.forEach((item) => {
-  objects["product_id"] = item.id
-  objects["qty"] = item.selected
-  objects["item_price"] = item.price
-  objects["item_total"] = item.item_total
+finalCart.forEach((item:any) => {
+  console.log('hej');
+   const objects = {
+    product_id: undefined,
+     qty:0,
+     item_price:0,
+     item_total:0,
+}
+  
+  objects.product_id=item.id
+  objects.qty = item.selected
+  objects.item_price = item.price
+  objects.item_total = item.price*item.selected
     
   newArray.push(objects)
   });
 
-  
-  console.log(objects)
-  console.log(newArray)
-  
+const orderTotal = (arr:any) =>{
+  let total = 0
+arr.forEach((item:order_items) => {
+total += item.item_total!
 
-  
-
-console.log(finalCart[indexTest].id,finalCart[idIndex].selected,finalCart[priceIndex].price,totalProduct);
-
-
+})
+return total
+}
 
   const firstName = document.querySelector<HTMLInputElement>('#newFirstName')?.value
   const lastName = document.querySelector<HTMLInputElement>('#newLastName')?.value
@@ -327,18 +323,15 @@ console.log(finalCart[indexTest].id,finalCart[idIndex].selected,finalCart[priceI
         customer_city: city ?? '',
         customer_phone_number: Number(phoneNumber) ?? '',
         customer_email: email ?? '',
-        order_total: 53,
-        order_items: {
-                   product_id: finalCart[indexTest].id,
-                   qty:finalCart[idIndex].selected,
-                   item_price:finalCart[priceIndex].price,
-                   item_total:totalProduct,
-               }
+        order_total: orderTotal(newArray),
+        order_items : newArray
             }
         ]
   console.log(person)
 
   await post(person)
+  console.log(newArray);
+  
  
 })
 
