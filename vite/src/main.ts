@@ -120,15 +120,16 @@ document.querySelector('#mInfo')?.addEventListener('click', (e) => {
   document.querySelector('.mInfo')?.classList.toggle('d-none') 
   
   })
+    updateTotalItems()
+}
 
-    //Checks if there is products in local storage and then prints out the number.
+const updateTotalItems = () => {
     document.querySelector('.cart-item-number')!.innerHTML = `${cartItemData.length}`
 }
 
 // Add to cart button
 const getJson = localStorage.getItem('products') ?? '[]'
 const cartItemData:any[] = JSON.parse(getJson)
-let qty:number = 0
 
 document.querySelector('.grid-container')!.addEventListener('click', (e) => {
     const target = e.target as HTMLButtonElement
@@ -297,6 +298,8 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
 
   //console.log(firstName, lastName, adress, postalNumber, city, phoneNumber, email)
 
+
+
      let person:newData[]= [
       {
         customer_first_name: firstName ?? '',
@@ -316,6 +319,15 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
   console.log(person)
 
   await post(person)
+
+    // Empty local storage from products when person has clicked submit
+    console.log("Clear the cart")
+    console.log(cartItemData)
+    while (cartItemData.length > 0) {
+      cartItemData.pop()
+    }
+    localStorage.clear()
+    updateTotalItems()
 })
 
 document.querySelector('.closebtn')!.addEventListener('click', () => {
