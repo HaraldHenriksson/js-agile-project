@@ -173,7 +173,7 @@ const saveItem = () => {
 const viewCart = () => {
     let productCounter = 1
     itemCollection.innerHTML = cartItemData.map(product => `
-       <tr>
+       <tr data-productid="${product.id}">
         <th scope="row">${productCounter++}</th>
         <td><img src="https://www.bortakvall.se/${product.image}" class="img-fluid rounded cart-image" alt="${product.name}"></td>
         <td>${product.name}</td>
@@ -201,7 +201,7 @@ document.querySelector('.cart-close')!.addEventListener('click', () => {
     document.querySelector('#arrow')!.classList.add('d-none')
 })
 
-let person: newData[] = []
+
 
 // person = [{
 //     customer_first_name: "harald",
@@ -217,6 +217,8 @@ let person: newData[] = []
 //     }
 // }]
 
+
+
 document.querySelector('#submit')!.addEventListener('click', async e => {
   e.preventDefault()
   //post(person)
@@ -230,20 +232,22 @@ document.querySelector('#submit')!.addEventListener('click', async e => {
   const email = document.querySelector<HTMLInputElement>('#newEmail')?.value
 
   //console.log(firstName, lastName, adress, postalNumber, city, phoneNumber, email)
-
-  const person = {
-    customer_first_name: firstName,
-    customer_last_name: lastName,
-    customer_address: adress,
-    customer_postcode:postalNumber,
-    customer_city: city,
-    customer_email: email,
-    order_total: 53,
-    order_items: {
-               product_id: 9,
-               qty: 11,
-           }
-  }
+    let person: newData[] = []
+     person = [
+      {
+        customer_first_name: firstName ?? '',
+        customer_last_name: lastName ?? '',
+        customer_address: adress ?? '',
+        customer_postcode: Number(postalNumber),
+        customer_city: city ?? '',
+        customer_email: email ?? '',
+        order_total: 53,
+        order_items: {
+                   product_id: 9,
+                   qty: 11,
+               }
+            }
+        ]
   console.log(person)
 
   await post(person)
