@@ -144,21 +144,42 @@ document.querySelector('.grid-container')!.addEventListener('click', (e) => {
             selected: 1 // Hur många produkter kunder väljer
         })
         saveItem()
-    }
-})
+    }})
 
 // Select the itemcollection div element for the cart
 const itemCollection = document.querySelector('#itemcollection')! as HTMLDivElement
 
-// Delete product in cart through trashcan
+// Click the trashcan to delete
 itemCollection.addEventListener('click', (e) => {
     const target = e.target as HTMLElement
     if(target.classList.contains('trash')) {
-        const index = cartItemData.findIndex(item => item.id === Number(target.dataset.itemid))
-        cartItemData.splice(index, 1)
-        saveItem()
+        deleteProduct(Number(target.dataset.itemid))
     }
 })
+
+// Delete Product from cart
+const deleteProduct = (productId:Number) => {
+    const index = cartItemData.findIndex(item => item.id === productId)
+    cartItemData.splice(index, 1)
+    saveItem()
+}
+
+// Update product qty cart data
+const updateProductQty = (data:any, productId:Number) => {
+    console.log(data, productId)
+    const index = cartItemData.findIndex(item => item.id === productId)
+    if(cartItemData[index].selected >= 0) {
+        if (data === 'add') {
+            cartItemData[index].selected = Number(cartItemData[index].selected) + 1
+        } else if (data === 'remove') {
+            cartItemData[index].selected = Number(cartItemData[index].selected) - 1
+            if(cartItemData[index].selected === 0) {
+                deleteProduct(productId)
+            }
+        }
+        saveItem()
+    }
+}
 
 // Save product to local storage
 let jsonItem = ``
@@ -177,13 +198,28 @@ const viewCart = () => {
         <th scope="row">${productCounter++}</th>
         <td><img src="https://www.bortakvall.se/${product.image}" class="img-fluid rounded cart-image" alt="${product.name}"></td>
         <td>${product.name}</td>
-        <td><span class="add">+</span> ${product.selected} <span class="remove">-</span></td>
+        <td><span class="add" data-productid="${product.id}">+</span> ${product.selected} <span class="remove" data-productid="${product.id}">-</span></td>
         <td>${product.price}</td>
         <td>${product.price * product.selected}</td>
         <td class="delete-item"><span class="material-symbols-outlined trash" data-itemid="${product.id}">delete</span></td>
     </tr>
     `).join('')
 }
+
+// Edit product quantity i cart
+itemCollection.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement
+
+    if(target.tagName === "SPAN") {
+        const productId = Number(target.dataset.productid)
+        if(target.classList.contains('add')) {
+            updateProductQty('add', productId)
+        }
+        if(target.classList.contains('remove')) {
+            updateProductQty('remove', productId)
+        }
+    }
+})
 
 // Open Cart
 document.querySelector('.cart-icon')!.addEventListener('click', () => {
