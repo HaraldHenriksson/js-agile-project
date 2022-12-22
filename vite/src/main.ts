@@ -270,6 +270,44 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
   e.preventDefault()
   //post(person)
 
+
+
+  const cartToSend = localStorage.getItem('products')
+  const finalCart = JSON.parse(cartToSend!!)
+  const indexTest = finalCart.findIndex(item => item.selected)
+  const idIndex = finalCart.findIndex(item => item.id)
+  const priceIndex = finalCart.findIndex(item => item.price)
+  let totalProduct = finalCart[priceIndex].price * finalCart[idIndex].selected
+
+  let objects = {
+                  product_id: undefined,
+                   qty:undefined,
+                   item_price:undefined,
+                   item_total:undefined,
+  }
+
+  const newArray = []
+  
+finalCart.forEach((item) => {
+  objects["product_id"] = item.id
+  objects["qty"] = item.selected
+  objects["item_price"] = item.price
+  objects["item_total"] = item.item_total
+    
+  newArray.push(objects)
+  });
+
+  
+  console.log(objects)
+  console.log(newArray)
+  
+
+  
+
+console.log(finalCart[indexTest].id,finalCart[idIndex].selected,finalCart[priceIndex].price,totalProduct);
+
+
+
   const firstName = document.querySelector<HTMLInputElement>('#newFirstName')?.value
   const lastName = document.querySelector<HTMLInputElement>('#newLastName')?.value
   const adress = document.querySelector<HTMLInputElement>('#newAdress')?.value
@@ -291,14 +329,17 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
         customer_email: email ?? '',
         order_total: 53,
         order_items: {
-                   product_id: 9,
-                   qty: 11,
+                   product_id: finalCart[indexTest].id,
+                   qty:finalCart[idIndex].selected,
+                   item_price:finalCart[priceIndex].price,
+                   item_total:totalProduct,
                }
             }
         ]
   console.log(person)
 
   await post(person)
+ 
 })
 
 document.querySelector('.closebtn')!.addEventListener('click', () => {

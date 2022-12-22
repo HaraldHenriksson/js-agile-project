@@ -27,5 +27,7 @@ export interface newData  {
     order_items: {
         product_id: number,
         qty: number,
+        item_price:number,
+        item_total:number,
     },
 }
