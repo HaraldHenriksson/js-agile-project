@@ -15,6 +15,14 @@ export interface products {
     stock_quantity: null
 }
 
+
+export interface order_items{
+    product_id: number | undefined,
+    qty: number | undefined,
+    item_price:number | undefined,
+    item_total:number | undefined,
+
+}
 export interface newData  {
     customer_first_name: string,
     customer_last_name: string,
@@ -24,8 +32,6 @@ export interface newData  {
     customer_phone_number?: number,
     customer_email:string,
     order_total: number,
-    order_items: {
-        product_id: number,
-        qty: number,
-    },
-}
+    order_items: order_items[],
+    }
+

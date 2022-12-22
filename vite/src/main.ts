@@ -4,6 +4,7 @@ import { fetchProducts } from './api'
 import { products } from './interface'
 import { post } from './api'
 import { newData } from './interface'
+import { order_items } from './interface'
 
 
 
@@ -288,6 +289,40 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
   e.preventDefault()
   //post(person)
 
+
+
+  const cartToSend = localStorage.getItem('products')
+  const finalCart = JSON.parse(cartToSend!!)
+
+  const newArray: order_items[] = []
+  console.log(finalCart);
+  
+finalCart.forEach((item:any) => {
+  console.log('hej');
+   const objects = {
+    product_id: undefined,
+     qty:0,
+     item_price:0,
+     item_total:0,
+}
+  
+  objects.product_id=item.id
+  objects.qty = item.selected
+  objects.item_price = item.price
+  objects.item_total = item.price*item.selected
+    
+  newArray.push(objects)
+  });
+
+const orderTotal = (arr:any) =>{
+  let total = 0
+arr.forEach((item:order_items) => {
+total += item.item_total!
+
+})
+return total
+}
+
   const firstName = document.querySelector<HTMLInputElement>('#newFirstName')?.value
   const lastName = document.querySelector<HTMLInputElement>('#newLastName')?.value
   const adress = document.querySelector<HTMLInputElement>('#newAdress')?.value
@@ -309,16 +344,16 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
         customer_city: city ?? '',
         customer_phone_number: Number(phoneNumber) ?? '',
         customer_email: email ?? '',
-        order_total: 53,
-        order_items: {
-                   product_id: 9,
-                   qty: 11,
-               }
+        order_total: orderTotal(newArray),
+        order_items : newArray
             }
         ]
   console.log(person)
 
   await post(person)
+  console.log(newArray);
+  
+ 
 
     // Empty local storage from products when person has clicked submit
     console.log("Clear the cart")
