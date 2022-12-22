@@ -12,7 +12,30 @@
 body {
   margin: 0;
   padding: 0;
+  background: linear-gradient(to right, rgba(255, 192, 203, 0.239), rgba(128, 0, 128, 0.282), rgba(0, 0, 255, 0.215), rgba(0, 128, 0, 0.249), rgba(255, 255, 0, 0.237));
+  /* animation: colorchange 5s linear infinite; */
 }
+
+/* @keyframes colorchange {
+  0% {
+    background-color: rgba(255, 192, 203, 0.284);
+  }
+  20% {
+    background-color: rgba(128, 0, 128, 0.284);
+  }
+  40% {
+    background-color: rgba(0, 0, 255, 0.231);
+  }
+  60% {
+    background-color: rgba(0, 128, 0, 0.242);
+  }
+  80% {
+    background-color: rgba(255, 255, 0, 0.268);
+  }
+  100% {
+    background-color: rgba(255, 192, 203, 0.233);
+  }
+} */
 
 h1 {
   font-size: 1.5em;
@@ -36,14 +59,14 @@ main {
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: transparent;
   padding: 0.6em 1.2em;
-  background-color: #b8a11d;
+  background-color: #f9d61064;
   transition: all 0.2s ease-in-out;
   width: 100%;
 }
 button:hover {
-  border-color: #111116;
+  border-color: #151116;
   transform: scale(1.1);  
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
@@ -57,13 +80,12 @@ button:focus-visible {
 }
 
 .name {
-  color: rgb(216, 31, 80);
+  color: rgba(216, 31, 80, 0.905);
 }
 
 .info {
   color: inherit;
   background-color: white;
-  text-decoration: underline;
 }
 
 img {
