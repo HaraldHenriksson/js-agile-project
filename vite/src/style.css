@@ -168,6 +168,9 @@ img {
 
 .cart-icon {
   cursor: pointer;
+  font-size: 24px;
+  transform: scale(1);
+  transition: transform 0.5s ease-in;
 }
 
 .cart-item-number {
@@ -230,8 +233,6 @@ img {
   display: flex;
   justify-content: center;
   text-decoration: none;
-  transform: scale(1);
-  transition: transform 0.5s ease-in;
 }
 
 .form-group {

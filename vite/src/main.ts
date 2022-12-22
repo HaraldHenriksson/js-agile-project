@@ -55,7 +55,7 @@ function renderProducts(array:products[]) {
         ${product.description}
       </div>
       </div>
-      <button class="button" data-idcart="${product.id}">Lägg till i varukorgen</button>
+      <button id="cart" class="button" data-idcart="${product.id}">Lägg till i varukorgen</button>
     </div>
     </div>
    
@@ -305,8 +305,8 @@ document.querySelector('.closebtn')!.addEventListener('click', () => {
   document.querySelector('#alertBox')!.classList.add('d-none')
 })
 
-const basket = document.querySelector<HTMLElement>('.material-symbols-outlined')!
+const basket = document.querySelector('.cart-icon') as HTMLElement
 
-document.querySelector('.button')!.addEventListener('click', () => {
-  basket.style.transform = 'scale(1.5)'
+document.querySelector('#cart')!.addEventListener('click', () => {
+  basket.style.transform = 'scale(1.5)';
 })
