@@ -12,10 +12,11 @@
 body {
   margin: 0;
   padding: 0;
-  animation: colorchange 20s linear infinite;
+  background: linear-gradient(to right, rgba(255, 192, 203, 0.239), rgba(128, 0, 128, 0.282), rgba(0, 0, 255, 0.215), rgba(0, 128, 0, 0.249), rgba(255, 255, 0, 0.237));
+  /* animation: colorchange 5s linear infinite; */
 }
 
-@keyframes colorchange {
+/* @keyframes colorchange {
   0% {
     background-color: rgba(255, 192, 203, 0.284);
   }
@@ -34,7 +35,7 @@ body {
   100% {
     background-color: rgba(255, 192, 203, 0.233);
   }
-}
+} */
 
 h1 {
   font-size: 1.5em;
