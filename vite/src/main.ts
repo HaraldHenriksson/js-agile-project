@@ -351,7 +351,8 @@ return total
   console.log(person)
 
   await post(person)
-  console.log(newArray);
+  
+  
   
  
 
