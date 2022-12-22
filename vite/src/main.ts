@@ -154,7 +154,7 @@ document.querySelector('.grid-container')!.addEventListener('click', (e) => {
           updateProductQty("add",IDToNumber )
         }
 
-      
+
         else{
         cartItemData.push({ 
             id: selectedItem![0].id,
@@ -222,16 +222,21 @@ const saveItem = () => {
 const viewCart = () => {
     let productCounter = 1
     itemCollection.innerHTML = cartItemData.map(product => `
-       <tr data-productid="${product.id}">
-        <th scope="row">${productCounter++}</th>
-        <td><img src="https://www.bortakvall.se/${product.image}" class="img-fluid rounded cart-image" alt="${product.name}"></td>
-        <td>${product.name}</td>
-        <td><span class="add" data-productid="${product.id}">+</span> ${product.selected} <span class="remove" data-productid="${product.id}">-</span></td>
-        <td>${product.price}</td>
-        <td>${product.price * product.selected}</td>
-        <td class="delete-item"><span class="material-symbols-outlined trash" data-itemid="${product.id}">delete</span></td>
-    </tr>
+        <div class="cart-item">
+            <span class="itemnumber">${productCounter++}</span>
+            <img class="img-fluid rounded cart-image" src="https://www.bortakvall.se/${product.image}" alt="${product.name}">
+            <span class="product-name">${product.name}</span>
+            <div class="add-remove">
+                <span class="add" data-productid="${product.id}">+</span> ${product.selected} <span class="remove" data-productid="${product.id}">-</span>
+            </div>
+            <span class="product-price">${product.price} sek/st</span>
+            <span class="total-price">${product.price * product.selected} sek</span>
+            <div class="delete-item">
+                <span class="material-symbols-outlined trash" data-itemid="${product.id}">delete</span>
+            </div>
+        </div>
     `).join('')
+    updateTotalPrice()
 }
 
 // Edit product quantity i cart
@@ -249,10 +254,22 @@ itemCollection.addEventListener('click', (e) => {
     }
 })
 
+// Render and display total cost
+const updateTotalPrice = () => {
+    let productCost = 0
+    let totalPrice = 0
+    console.log("Starting total cost")
+    const totalCost = document.querySelectorAll('.total-price')
+    totalCost.forEach(item => {
+        productCost = Number(item.innerHTML.replace(" sek", ""))
+        totalPrice += productCost
+    })
+    document.querySelector('.pay-price')!.innerHTML = `${totalPrice} sek`
+}
+
 // Open Cart
 document.querySelector('.cart-icon')!.addEventListener('click', () => {
     document.querySelector('.cart-container')!.classList.remove('d-none')
-
     // Render the cart view
     viewCart()
 })
@@ -279,8 +296,8 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
   const email = document.querySelector<HTMLInputElement>('#newEmail')?.value
 
   //console.log(firstName, lastName, adress, postalNumber, city, phoneNumber, email)
-    let person: newData[] = []
-     person = [
+
+     let person:newData[]= [
       {
         customer_first_name: firstName ?? '',
         customer_last_name: lastName ?? '',
