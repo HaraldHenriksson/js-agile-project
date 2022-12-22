@@ -1,4 +1,4 @@
-import {products} from './interface'
+// import {products} from './interface'
 import { newData } from './interface'
 
 
@@ -17,6 +17,8 @@ export const fetchProducts = async () => {
 }
 
 export const post = async (person: newData[]) => {
+
+  
     const res = await fetch('https://www.bortakvall.se/api/orders', {
       method: 'POST',
       headers: {
@@ -24,7 +26,6 @@ export const post = async (person: newData[]) => {
       },
       body: JSON.stringify(person)
     })
-  
     if (!res.ok) {
         alert('Something went wrong, try again later')
       throw new Error(`${res.status} ${res.statusText}`)
@@ -32,5 +33,6 @@ export const post = async (person: newData[]) => {
       document.querySelector('#alertBox')!.classList.remove('d-none')
       document.querySelector('.cart-container')!.classList.add('d-none')
     }
-    return await res.json() as newData
+    
+    return await res.json() as newData[]
   }
