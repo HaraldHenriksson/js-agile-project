@@ -154,7 +154,7 @@ document.querySelector('.grid-container')!.addEventListener('click', (e) => {
           updateProductQty("add",IDToNumber )
         }
 
-      
+
         else{
         cartItemData.push({ 
             id: selectedItem![0].id,
@@ -232,7 +232,7 @@ const viewCart = () => {
             <span class="product-price">${product.price} sek/st</span>
             <span class="total-price">${product.price * product.selected} sek</span>
             <div class="delete-item">
-                <span class="material-symbols-outlined trash">delete</span>
+                <span class="material-symbols-outlined trash" data-itemid="${product.id}">delete</span>
             </div>
         </div>
     `).join('')
