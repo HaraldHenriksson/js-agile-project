@@ -128,22 +128,48 @@ document.querySelector('#mInfo')?.addEventListener('click', (e) => {
 // Add to cart button
 const getJson = localStorage.getItem('products') ?? '[]'
 const cartItemData:any[] = JSON.parse(getJson)
+let qty:number = 0
 
 document.querySelector('.grid-container')!.addEventListener('click', (e) => {
     const target = e.target as HTMLButtonElement
+    console.log('hej');
+
+
+  
+    
     if(target.dataset.idcart) {
         let selectedItem = productsCard ? productsCard.filter(post => {
             return post.id === Number(target.dataset.idcart)
+            
         }) : null
+
+      
+        // Making target a number instead of string
+        const IDToNumber:number = (parseInt(target.dataset.idcart));
+        //array with ID from products in the cart
+        const IdInCartItemData:number[] = cartItemData.map(obj => parseInt(obj.id))
+      
+        if(IdInCartItemData.includes(IDToNumber)){
+      
+          updateProductQty("add",IDToNumber )
+        }
+
+      
+        else{
         cartItemData.push({ 
             id: selectedItem![0].id,
             name: selectedItem![0].name,
             description: selectedItem![0].description,
             price: selectedItem![0].price,
             image: selectedItem![0].images.thumbnail,
-            selected: 1 // Hur många produkter kunder väljer
+            selected: 1// Hur många produkter kunder väljer
         })
+      }
         saveItem()
+
+
+        ;
+        
     }})
 
 // Select the itemcollection div element for the cart
@@ -171,6 +197,7 @@ const updateProductQty = (data:any, productId:Number) => {
     if(cartItemData[index].selected >= 0) {
         if (data === 'add') {
             cartItemData[index].selected = Number(cartItemData[index].selected) + 1
+
         } else if (data === 'remove') {
             cartItemData[index].selected = Number(cartItemData[index].selected) - 1
             if(cartItemData[index].selected === 0) {
@@ -188,6 +215,7 @@ const saveItem = () => {
     localStorage.setItem('products', jsonItem)
     document.querySelector('.cart-item-number')!.innerHTML = `${cartItemData.length}`
     viewCart()
+    console.log(localStorage)
 }
 
 //Render cart with products
