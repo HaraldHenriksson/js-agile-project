@@ -321,9 +321,3 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
 document.querySelector('.closebtn')!.addEventListener('click', () => {
   document.querySelector('#alertBox')!.classList.add('d-none')
 })
-
-const basket = document.querySelector('.cart-icon') as HTMLElement
-
-document.querySelector('#cart')!.addEventListener('click', () => {
-  basket.style.transform = 'scale(1.5)';
-})
