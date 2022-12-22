@@ -28,7 +28,8 @@ export const post = async (person: newData[]) => {
     if (!res.ok) {
         alert('Something went wrong, try again later')
       throw new Error(`${res.status} ${res.statusText}`)
+    } else {
+      alert('Successful!🥳 Thank you for you purchase')
     }
-    alert('Successful!🥳 Thank you for you purchase')
     return await res.json() as newData
   }
