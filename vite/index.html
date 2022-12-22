@@ -35,29 +35,35 @@
       </div>
     </main>
 
-    <!-- Start: Varukorg - Centrerad modal för varukorgen -->
+    <!-- My test responsive cart -->
     <div class="cart-container d-none">
       <div class="cart-list">
         <div class="cart-list-header">
           <span class="cart-title">Varukorg</span>
           <span class="material-symbols-outlined cart-close">cancel</span>
         </div>
-        <table class="table table-hover table-responsive align-middle">
-          <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col"><!-- thumbnail --></th>
-            <th scope="col">Produkt</th>
-            <th scope="col">Antal</th>
-            <th scope="col">st pris</th>
-            <th scope="col">Totalt</th>
-            <th scope="col"><!-- Ta bort --></th>
-          </tr>
-          </thead>
-          <tbody id="itemcollection">
-          <!-- Product items in cart -->
-          </tbody>
-        </table>
+        <div class="cart-content-container">
+          <div class="item-header">
+            <div class="cart-item-titles">
+              <span>#</span>
+              <span></span>
+              <span class="product-name">Produkt</span>
+              <span class="add-remove">Antal</span>
+              <span>Pris</span>
+              <span>Totalt</span>
+              <span></span>
+            </div>
+          </div>
+          <div id="itemcollection">
+            <!-- Cart items -->
+          </div>
+          <div class="topay">
+            <span class="pay">Att betala: </span><span class="pay-price">20 sek</span>
+          </div>
+        </div>
+
+
+
         <button id="checkout" class="btn btn-primary">Gå till kassan</button>
        <a href="#"><span id="arrow" class="material-symbols-outlined d-none">
         arrow_upward
@@ -93,9 +99,8 @@
         </div>
         <button id="submit" type="submit" class="btn btn-primary">Skicka och lägg beställning</button>
       </form>
-    </div>
       </div>
-    <!-- Varukorg slut -->
+    </div>
 
     <footer></footer>
     <script type="module" src="src/main.ts"></script>
