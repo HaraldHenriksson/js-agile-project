@@ -276,3 +276,9 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
 document.querySelector('.closebtn')!.addEventListener('click', () => {
   document.querySelector('#alertBox')!.classList.add('d-none')
 })
+
+const basket = document.querySelector<HTMLElement>('.material-symbols-outlined')!
+
+document.querySelector('.button')!.addEventListener('click', () => {
+  basket.style.transform = 'scale(1.5)'
+})
