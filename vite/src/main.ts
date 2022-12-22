@@ -55,7 +55,7 @@ function renderProducts(array:products[]) {
         ${product.description}
       </div>
       </div>
-      <button class="button" data-idcart="${product.id}">Lägg till i varukorgen</button>
+      <button id="cart" class="button" data-idcart="${product.id}">Lägg till i varukorgen</button>
     </div>
     </div>
    
