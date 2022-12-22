@@ -59,14 +59,14 @@ main {
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: transparent;
   padding: 0.6em 1.2em;
-  background-color: #b8a11d;
+  background-color: #f9d61064;
   transition: all 0.2s ease-in-out;
   width: 100%;
 }
 button:hover {
-  border-color: #111116;
+  border-color: #151116;
   transform: scale(1.1);  
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
@@ -80,13 +80,12 @@ button:focus-visible {
 }
 
 .name {
-  color: rgb(216, 31, 80);
+  color: rgba(216, 31, 80, 0.905);
 }
 
 .info {
   color: inherit;
   background-color: white;
-  text-decoration: underline;
 }
 
 img {

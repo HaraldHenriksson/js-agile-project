@@ -45,7 +45,7 @@ function renderProducts(array:products[]) {
         <img src="https://www.bortakvall.se/${product.images.thumbnail}" alt="product">
         <h1 class="name">${product.name}</h1>
         <p class="price">${product.price}kr</p>
-        <button class="info" data-id="${product.id}">More info</button>
+        <button class="info" data-id="${product.id}">Mer info</button>
         <div id="${product.id}" class="card-inner d-none">
       <div class="card-body">
       <div class="popup-close">X</div>
@@ -55,7 +55,7 @@ function renderProducts(array:products[]) {
         ${product.description}
       </div>
       </div>
-      <button class="button" data-idcart="${product.id}">Add to Cart</button>
+      <button class="button" data-idcart="${product.id}">Lägg till i varukorgen</button>
     </div>
     </div>
    
