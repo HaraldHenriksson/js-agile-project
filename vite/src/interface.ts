@@ -21,6 +21,7 @@ export interface newData  {
     customer_address: string,
     customer_postcode: number,
     customer_city: string,
+    customer_phone_number?: number,
     customer_email:string,
     order_total: number,
     order_items: {

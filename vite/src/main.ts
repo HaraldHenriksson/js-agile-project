@@ -202,23 +202,6 @@ document.querySelector('.cart-close')!.addEventListener('click', () => {
 })
 
 
-
-// person = [{
-//     customer_first_name: "harald",
-//     customer_last_name: "henriksson",
-//     customer_address: "kajgatan",
-//     customer_postcode: 23440,
-//     customer_city: "lomma",
-//     customer_email: "harald@espinagar.se",
-//     order_total: 53,
-//     order_items: {
-//         product_id: 9,
-//         qty: 11,
-//     }
-// }]
-
-
-
 document.querySelector('.contact-form')!.addEventListener('submit', async e => {
   e.preventDefault()
   //post(person)
@@ -228,7 +211,7 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
   const adress = document.querySelector<HTMLInputElement>('#newAdress')?.value
   const postalNumber = document.querySelector<HTMLInputElement>('#newPostalNumber')?.value
   const city = document.querySelector<HTMLInputElement>('#newCity')?.value
-  //const phoneNumber = document.querySelector<HTMLInputElement>('#newPhoneNumber')?.value
+  const phoneNumber = document.querySelector<HTMLInputElement>('#newPhoneNumber')?.value
   const email = document.querySelector<HTMLInputElement>('#newEmail')?.value
 
   //console.log(firstName, lastName, adress, postalNumber, city, phoneNumber, email)
@@ -240,6 +223,7 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
         customer_address: adress ?? '',
         customer_postcode: Number(postalNumber),
         customer_city: city ?? '',
+        customer_phone_number: Number(phoneNumber) ?? '',
         customer_email: email ?? '',
         order_total: 53,
         order_items: {
