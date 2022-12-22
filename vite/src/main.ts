@@ -219,7 +219,7 @@ document.querySelector('.cart-close')!.addEventListener('click', () => {
 
 
 
-document.querySelector('#submit')!.addEventListener('click', async e => {
+document.querySelector('.contact-form')!.addEventListener('submit', async e => {
   e.preventDefault()
   //post(person)
 
