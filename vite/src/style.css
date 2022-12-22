@@ -12,6 +12,28 @@
 body {
   margin: 0;
   padding: 0;
+  animation: colorchange 20s linear infinite;
+}
+
+@keyframes colorchange {
+  0% {
+    background-color: rgba(255, 192, 203, 0.284);
+  }
+  20% {
+    background-color: rgba(128, 0, 128, 0.284);
+  }
+  40% {
+    background-color: rgba(0, 0, 255, 0.231);
+  }
+  60% {
+    background-color: rgba(0, 128, 0, 0.242);
+  }
+  80% {
+    background-color: rgba(255, 255, 0, 0.268);
+  }
+  100% {
+    background-color: rgba(255, 192, 203, 0.233);
+  }
 }
 
 h1 {
