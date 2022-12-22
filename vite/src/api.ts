@@ -29,7 +29,8 @@ export const post = async (person: newData[]) => {
         alert('Something went wrong, try again later')
       throw new Error(`${res.status} ${res.statusText}`)
     } else {
-      alert('Successful!🥳 Thank you for you purchase')
+      document.querySelector('#alertBox')!.classList.remove('d-none')
+      document.querySelector('.cart-container')!.classList.add('d-none')
     }
     return await res.json() as newData
   }

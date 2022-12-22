@@ -237,3 +237,6 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
   await post(person)
 })
 
+document.querySelector('.closebtn')!.addEventListener('click', () => {
+  document.querySelector('#alertBox')!.classList.add('d-none')
+})
