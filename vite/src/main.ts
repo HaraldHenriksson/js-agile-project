@@ -301,8 +301,8 @@ finalCart.forEach((item:any) => {
   console.log('hej');
    const objects = {
     product_id: undefined,
-     qty:0,
-     item_price:0,
+     qty:"0",
+     item_price:"0",
      item_total:0,
 }
   
@@ -335,19 +335,19 @@ return total
 
 
 
-     let person:newData[]= [
+     let person:newData= 
       {
         customer_first_name: firstName ?? '',
         customer_last_name: lastName ?? '',
         customer_address: adress ?? '',
-        customer_postcode: Number(postalNumber),
+        customer_postcode: postalNumber??'',
         customer_city: city ?? '',
-        customer_phone_number: Number(phoneNumber) ?? '',
+        customer_phone_number: phoneNumber ?? '',
         customer_email: email ?? '',
-        order_total: orderTotal(newArray),
-        order_items : newArray
+        order_total:orderTotal(newArray) ,
+        order_items : newArray,
             }
-        ]
+        
   console.log(person)
 
   await post(person)
