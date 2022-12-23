@@ -335,19 +335,19 @@ return total
 
 
 
-     let person:newData[]= [
+     let person:newData= 
       {
         customer_first_name: firstName ?? '',
         customer_last_name: lastName ?? '',
         customer_address: adress ?? '',
-        customer_postcode: Number(postalNumber),
+        customer_postcode: postalNumber??'',
         customer_city: city ?? '',
         customer_phone_number: Number(phoneNumber) ?? '',
         customer_email: email ?? '',
         order_total: orderTotal(newArray),
         order_items : newArray
             }
-        ]
+        
   console.log(person)
 
   await post(person)

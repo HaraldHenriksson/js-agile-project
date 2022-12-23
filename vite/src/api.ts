@@ -16,7 +16,7 @@ export const fetchProducts = async () => {
     
 }
 
-export const post = async (person: newData[]) => {
+export const post = async (person: newData) => {
 
   
     const res = await fetch('https://www.bortakvall.se/api/orders', {
@@ -26,6 +26,8 @@ export const post = async (person: newData[]) => {
       },
       body: JSON.stringify(person)
     })
+    console.log(JSON.stringify(person));
+    
     if (!res.ok) {
         alert('Something went wrong, try again later')
       throw new Error(`${res.status} ${res.statusText}`)
