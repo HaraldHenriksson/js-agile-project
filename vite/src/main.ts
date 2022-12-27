@@ -370,7 +370,7 @@ document.querySelector('.closebtn')!.addEventListener('click', () => {
   document.querySelector('#alertBox')!.classList.add('d-none')
 })
 
-// Filter add filter text
+// Add filter text form event
 const filterForm = document.querySelector('#filter') as HTMLFormElement
 filterForm.addEventListener('keyup', (e) => {
     e.preventDefault()
@@ -381,12 +381,51 @@ filterForm.addEventListener('keyup', (e) => {
     }
 })
 
-// Filter function
+// Text filter function
 const filterQuery = (key:string) => {
     console.log(key)
-    //productsCards
     const searchedItems = productsCard.filter(item => item.name.toLowerCase().trim().includes(key))
-    console.log(searchedItems)
-
+    // Render products
     renderProducts(searchedItems)
+}
+
+// Filter check form
+const filterCheck = document.querySelector('#filter-check') as HTMLFormElement
+filterCheck.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    //filterCheck.filt1.checked = !filterCheck.filt1.checked
+    //filterCheck.filt2.checked = !filterCheck.filt2.checked
+
+    let filterWordArr:string[] = []
+
+    if(filterCheck.gluten){
+        filterCheck.gluten.checked = !filterCheck.gluten.checked
+        if(filterCheck.gluten.checked) {
+            filterWordArr.push('olja', 'oljor', 'vete', 'nöt')
+            filterByGluten(filterWordArr)
+        } else {
+            renderProducts(productsCard)
+        }
+    }
+})
+
+// Function filter by gluten
+//const glutenKeywords:string[] = ['olja', 'oljor', 'vete', 'nöt'] //Add or remove to change the outcome
+const savedFilterArr:any[] = []
+const filterByGluten = (filterArr:string[]) => {
+    filterArr.forEach(word => {
+        const filterWord = productsCard.filter(item => {
+            return item.description.toLowerCase().trim().includes(word)
+        })
+        savedFilterArr.push(filterWord)
+    })
+    // Super filter and merge of the result
+    const mergeGluten = savedFilterArr.flat(1)
+    const glutenArr = mergeGluten.filter((item, index) => mergeGluten.indexOf(item) === index)
+    const glutenResult = productsCard.filter(items => !glutenArr.some(glutItm => items.name === glutItm.name))
+    console.log("Gluten items: ", glutenResult)
+
+    // Renders the new result
+    renderProducts(glutenResult)
 }

@@ -298,6 +298,11 @@ img {
   color: black;
 }
 
+.filterfunctions {
+  display: flex;
+  flex-direction: row;
+}
+
 @media (max-width: 500px) {
   .grid-container {
     grid-template-columns: 1fr;
