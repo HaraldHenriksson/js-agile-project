@@ -369,3 +369,24 @@ return total
 document.querySelector('.closebtn')!.addEventListener('click', () => {
   document.querySelector('#alertBox')!.classList.add('d-none')
 })
+
+// Filter add filter text
+const filterForm = document.querySelector('#filter') as HTMLFormElement
+filterForm.addEventListener('keyup', (e) => {
+    e.preventDefault()
+    const searchKey:string = filterForm.filtertext.value.toLowerCase().trim()
+    filterQuery(searchKey)
+    if(!searchKey) {
+        renderProducts(productsCard);
+    }
+})
+
+// Filter function
+const filterQuery = (key:string) => {
+    console.log(key)
+    //productsCards
+    const searchedItems = productsCard.filter(item => item.name.toLowerCase().trim().includes(key))
+    console.log(searchedItems)
+
+    renderProducts(searchedItems)
+}
