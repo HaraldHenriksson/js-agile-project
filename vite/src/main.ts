@@ -352,8 +352,45 @@ return total
 
   await post(person)
   
-  
-  
+  let productCounter = 1
+ document.querySelector('.cart-list')!.innerHTML = cartItemData.map(product => `
+ <div class="cart-list-header">
+        <span class="cart-title">Tack för din beställning!<br>
+        Följande varor är påväg till dig:</span>
+        <span class="material-symbols-outlined cart-close">cancel</span>
+      </div>
+      <div class="cart-content-container">
+        <div class="item-header">
+          <div class="cart-item-titles">
+            <span>#</span>
+            <span></span>
+            <span class="product-name">Produkt</span>
+            <span class="add-remove">Antal</span>
+            <span>Pris</span>
+            <span>Totalt</span>
+            <span></span>
+          </div>
+        </div>
+        <div class="cart-item">
+            <span class="itemnumber">${productCounter++}</span>
+            <img class="img-fluid rounded cart-image" src="https://www.bortakvall.se/${product.image}" alt="${product.name}">
+            <span class="product-name">${product.name}</span>
+            <div class="add-remove">
+                ${product.selected}
+            </div>
+            <span class="product-price">${product.price} sek/st</span>
+            <span class="total-price">${product.price * product.selected} sek</span>
+            <div class="delete-item">
+                <span class="material-symbols-outlined trash" data-itemid="${product.id}">delete</span>
+            </div>
+        </div>
+        <div class="topay">
+          <span class="pay">Att betala: </span><span class="pay-price">20 sek</span>
+        </div>
+      </div>
+      </div>
+  `).join('')
+  // updateTotalPrice()
  
 
     // Empty local storage from products when person has clicked submit

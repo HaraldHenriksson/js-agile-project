@@ -33,7 +33,7 @@ export const post = async (person: newData) => {
       throw new Error(`${res.status} ${res.statusText}`)
     } else {
       document.querySelector('#alertBox')!.classList.remove('d-none')
-      document.querySelector('.cart-container')!.classList.add('d-none')
+      // document.querySelector('.cart-container')!.classList.add('d-none')
     }
     
     return await res.json() as newData[]
