@@ -485,6 +485,15 @@ img {
   .thumbnail-img{
     padding: 8%;
   }
+  .filterfunctions {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .filtertextinput {
+    width: 100%;
+    margin-bottom: 16px;
+  }
 }
 
 @media (max-width: 620px) {
@@ -500,6 +509,15 @@ img {
   }
   .thumbnail-img{
     padding: 3%;
+  }
+  .filterfunctions {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .filtertextinput {
+    width: 100%;
+    margin-bottom: 16px;
   }
 }
 
