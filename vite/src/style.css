@@ -397,6 +397,18 @@ img {
   rotate: 25deg;
 }
 
+.sortbyname {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16px;
+  cursor: pointer;
+  color: rgba(216, 31, 80, 0.905);
+}
+
+.sortbyname span:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 500px) {
   .grid-container {
     grid-template-columns: 1fr;

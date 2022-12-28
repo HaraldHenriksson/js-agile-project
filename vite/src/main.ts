@@ -32,13 +32,12 @@ console.log("Samtliga produkter", productsCard);
 
 getProducts()
 
-
-
-
-
+let globalProductArray:any[]
 
 //rendering av produkter på main sida
 function renderProducts(array:products[]) {
+
+    globalProductArray = array
 
     document.querySelector('.filtered-items')!.innerHTML = `${array.length} godisar visas i listan`
 
@@ -133,6 +132,15 @@ document.querySelector('#mInfo')?.addEventListener('click', (e) => {
 
 const updateTotalItems = () => {
     document.querySelector('.cart-item-number')!.innerHTML = `${cartItemData.length}`
+}
+
+document.querySelector('.sortbyname')!.addEventListener('click', () => {
+    sortProducts(globalProductArray)
+})
+
+// Sort list based on name
+const sortProducts = (globalArray:any) => {
+    renderProducts(globalArray.sort((a:any, b:any) => a.name.localeCompare(b.name)))
 }
 
 // Show or hide if the product is out of stock
