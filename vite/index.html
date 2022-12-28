@@ -30,15 +30,20 @@
       <div class="container-lg">
         <p class="productsQty"></p>
         <div class="filterfunctions">
-          <form id="filter">
-            <input type="text" id="filtertext" class="filtertext" placeholder="Filtrera godis">
-          </form>
-          <strong>Jag gillar inte:</strong>
-          <form id="filter-check" class="filter-check">
-            <button id="filter-alt1" class="filterbt">Glutenfritt</button>
-            <button id="filter-alt2" class="filterbt">Mjölk</button>
-            <button id="filter-alt3" class="filterbt">Nötter</button>
-          </form>
+          <div class="filtertextinput">
+            <strong>Filter</strong>
+            <form id="filter">
+              <input type="text" id="filtertext" class="filtertext" placeholder="Skriv för att filtrera">
+            </form>
+          </div>
+          <div class="button-filter">
+            <strong>Visa produkter utan:</strong>
+            <form id="filter-check" class="filter-check">
+              <button id="filter-alt1" class="filterbt">Gluten</button>
+              <button id="filter-alt2" class="filterbt">Mjölk</button>
+              <button id="filter-alt3" class="filterbt">Nötter</button>
+            </form>
+          </div>
         </div>
         <div class="filtered-items">
 
