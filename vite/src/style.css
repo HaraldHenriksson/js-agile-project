@@ -301,6 +301,30 @@ img {
 .filterfunctions {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.filtered-items {
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.filter-check {
+  display: flex;
+  flex-direction: row;
+}
+
+.filterbt {
+  margin: 0 8px 0 8px;
+}
+
+.filtertext {
+  margin-right: 32px;
+}
+
+.selected {
+  background: #FF928B;
 }
 
 @media (max-width: 500px) {

@@ -40,6 +40,8 @@ getProducts()
 //rendering av produkter på main sida
 function renderProducts(array:products[]) {
 
+    document.querySelector('.filtered-items')!.innerHTML = `${array.length} godisar visas i listan`
+
 	document.querySelector('.grid-container')!.innerHTML = array
 		.map(product=> (`
         <div class="card">
@@ -389,43 +391,75 @@ const filterQuery = (key:string) => {
     renderProducts(searchedItems)
 }
 
-// Filter check form
-const filterCheck = document.querySelector('#filter-check') as HTMLFormElement
-filterCheck.addEventListener('click', (e) => {
+// Filter buttons form
+const filterButtonForm = document.querySelector('#filter-check') as HTMLFormElement
+filterButtonForm.addEventListener('click', (e) => {
     e.preventDefault()
-
-    //filterCheck.filt1.checked = !filterCheck.filt1.checked
-    //filterCheck.filt2.checked = !filterCheck.filt2.checked
-
-    let filterWordArr:string[] = []
-
-    if(filterCheck.gluten){
-        filterCheck.gluten.checked = !filterCheck.gluten.checked
-        if(filterCheck.gluten.checked) {
-            filterWordArr.push('olja', 'oljor', 'vete', 'nöt')
-            filterByGluten(filterWordArr)
+    const target = e.target as HTMLElement
+    if(target.tagName === 'BUTTON') {
+        let isSelected: boolean
+        if(!target.classList.contains('selected')) {
+            isSelected = true
+            target.classList.add('selected')
         } else {
-            renderProducts(productsCard)
+            isSelected = false
+            target.classList.remove('selected')
         }
+        filterByButton(target.getAttribute('id'), isSelected)
     }
 })
 
-// Function filter by gluten
-//const glutenKeywords:string[] = ['olja', 'oljor', 'vete', 'nöt'] //Add or remove to change the outcome
-const savedFilterArr:any[] = []
-const filterByGluten = (filterArr:string[]) => {
-    filterArr.forEach(word => {
-        const filterWord = productsCard.filter(item => {
-            return item.description.toLowerCase().trim().includes(word)
-        })
-        savedFilterArr.push(filterWord)
-    })
-    // Super filter and merge of the result
-    const mergeGluten = savedFilterArr.flat(1)
-    const glutenArr = mergeGluten.filter((item, index) => mergeGluten.indexOf(item) === index)
-    const glutenResult = productsCard.filter(items => !glutenArr.some(glutItm => items.name === glutItm.name))
-    console.log("Gluten items: ", glutenResult)
+// Filter by buttons add filter strings function
+// We can add strings or filter words by adding new arrays
+const filterAlt1:string[] = ['olja', 'oljor', 'vete']
+const filterAlt2:string[] = ['mjölk']
+const filterAlt3:string[] = ['nöt']
+// Global button filter result
+let filterSelected:any[] = []
 
-    // Renders the new result
-    renderProducts(glutenResult)
+const filterByButton = (filterType:any, isSelected:boolean) => {
+    if(filterType === 'filter-alt1' && isSelected) {
+        filterSelected.push(filterAlt1)
+    } else if (filterType === 'filter-alt1' && !isSelected) {
+        filterSelected = removeButtonFilter(filterAlt1)
+    }
+    if(filterType === 'filter-alt2' && isSelected) {
+        filterSelected.push(filterAlt2)
+    } else if (filterType === 'filter-alt2' && !isSelected) {
+        filterSelected = removeButtonFilter(filterAlt2)
+    }
+    if(filterType === 'filter-alt3' && isSelected) {
+        filterSelected.push(filterAlt3)
+    } else if (filterType === 'filter-alt3' && !isSelected) {
+        filterSelected = removeButtonFilter(filterAlt3)
+    }
+    console.log("Filter inside function: ", filterSelected.flat(1))
+    filterButtonResult(filterSelected.flat(1))
+}
+
+// Remove filter
+const removeButtonFilter = (filterArr:any) => {
+    let filterRes = filterSelected.flat(1).filter((item: any) => !filterArr.some((altItem: any) => item === altItem))
+    console.log("Remove filter function: ", filterRes)
+    return filterRes
+}
+
+// Get the button filtered result and render it
+const filterButtonResult = (filterResult:any[]) => {
+    console.log(filterResult)
+    let filteredArray:any = []
+    let savedArray: any = []
+    filterResult.forEach(word => {
+        filteredArray = productsCard.filter(item => item.description.toLowerCase().trim().includes(word))
+        savedArray.push(filteredArray)
+    })
+    savedArray = savedArray.flat(1)
+    let mergeFilter:any = savedArray.filter((item:any, index:any) => savedArray.indexOf(item) === index)
+    let finalFilter:any = productsCard.filter(items => !mergeFilter.some(mergeItem => items.name === mergeItem.name))
+    console.log("Sanningens ögonblicK: ", finalFilter)
+    renderProducts(finalFilter)
+    if(savedArray.length === 0) {
+        console.log("Array Empty")
+        renderProducts(productsCard)
+    }
 }

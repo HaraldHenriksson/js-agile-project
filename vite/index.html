@@ -30,17 +30,18 @@
       <div class="container-lg">
         <p class="productsQty"></p>
         <div class="filterfunctions">
-        <form id="filter">
-          <input type="text" id="filtertext" class="filtertext" placeholder="Filtrera godis">
-        </form>
-        <form id="filter-check">
-          <label for="gluten">Glutenfritt</label>
-          <input type="checkbox" id="gluten" name="gluten" class="checks" value="gluten">
-          <label for="filt1">Oljor</label>
-          <input type="checkbox" id="filt1" name="filt1" class="checks" value="filt1">
-          <label for="filt2">Nötter</label>
-          <input type="checkbox" id="filt2" name="filt2" class="checks" value="filt2">
-        </form>
+          <form id="filter">
+            <input type="text" id="filtertext" class="filtertext" placeholder="Filtrera godis">
+          </form>
+          <strong>Jag gillar inte:</strong>
+          <form id="filter-check" class="filter-check">
+            <button id="filter-alt1" class="filterbt">Glutenfritt</button>
+            <button id="filter-alt2" class="filterbt">Mjölk</button>
+            <button id="filter-alt3" class="filterbt">Nötter</button>
+          </form>
+        </div>
+        <div class="filtered-items">
+
         </div>
         <div class="grid-container">
         <!-- Products -->
