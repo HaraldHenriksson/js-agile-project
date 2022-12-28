@@ -29,9 +29,29 @@
       
       <div class="container-lg">
         <p class="productsQty"></p>
-        <form id="filter">
-          <input type="text" id="filtertext" class="filtertext" placeholder="Filtera godis">
-        </form>
+        <div class="filterfunctions">
+          <div class="filtertextinput">
+            <strong>Filter</strong>
+            <form id="filter">
+              <input type="text" id="filtertext" class="filtertext" placeholder="Skriv för att filtrera">
+            </form>
+          </div>
+          <div class="button-filter">
+            <strong>Visa produkter utan:</strong>
+            <form id="filter-check" class="filter-check">
+              <button id="filter-alt1" class="filterbt">Gluten</button>
+              <button id="filter-alt2" class="filterbt">Mjölk</button>
+              <button id="filter-alt3" class="filterbt">Nötter</button>
+            </form>
+          </div>
+        </div>
+        <div class="filtered-items">
+          <!-- How many products is in the list -->
+        </div>
+        <div class="sortbyname">
+          <span class="material-symbols-outlined">sort</span>
+          <span>Sortera listan efter namn<span>
+        </div>
         <div class="grid-container">
         <!-- Products -->
         </div>
@@ -52,6 +72,7 @@
               <span></span>
               <span class="product-name">Produkt</span>
               <span class="add-remove">Antal</span>
+              <span>I lager</span>
               <span>Pris</span>
               <span>Totalt</span>
               <span></span>

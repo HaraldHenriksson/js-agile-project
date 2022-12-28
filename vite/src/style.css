@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -33,6 +35,12 @@ main {
 
 .card {
   padding: 2em;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card h1 {
+  text-align: center;
 }
 
 .grid-container {
@@ -62,10 +70,19 @@ button:focus-visible {
 
 .price {
   color: grey;
+  background: rgba(216, 31, 80, 0.905);
+  display: block;
+  width: fit-content;
+  padding: 12px;
+  border-radius: 50%;
+  color: white;
+  font-family: 'Fredoka One', cursive;
 }
 
 .name {
   color: rgba(216, 31, 80, 0.905);
+  font-family: 'Fredoka One', cursive;
+  margin-top: 32px;
 }
 
 .info {
@@ -307,6 +324,100 @@ img {
 
 .closebtn:hover {
   color: black;
+}
+
+.filterfunctions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 16px;
+  justify-content: space-between;
+}
+
+.filterfunctions strong {
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.filtered-items {
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.filter-check {
+  display: flex;
+  flex-direction: row;
+}
+
+.filterbt {
+  margin: 0 8px 0 8px;
+  background: #8ebfa8;
+  color: #3a4d43;
+}
+
+.filterbt:first-child {
+  margin-left: 0;
+}
+
+.filtertext {
+  height: 43px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 0 16px;
+  width: 100%;
+}
+
+.filtertextinput {
+  width: 50%;
+}
+
+.button-filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.selected {
+  background: #3a4d43;
+  color: #8ebfa8;
+}
+
+.productsQty {
+  font-family: 'Fredoka One', cursive;
+  font-size: 32px;
+  color: rgba(216, 31, 80, 0.905);
+}
+
+.outofstock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;
+}
+
+.outofstock-text {
+  font-size: 48px;
+  font-family: 'Fredoka One', cursive;
+  color: rgba(246, 126, 157, 0.9);
+  rotate: 25deg;
+}
+
+.sortbyname {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16px;
+  cursor: pointer;
+  color: rgba(216, 31, 80, 0.905);
+}
+
+.sortbyname span:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 500px) {
