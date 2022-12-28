@@ -48,6 +48,7 @@ function renderProducts(array:products[]) {
         <img src="https://www.bortakvall.se/${product.images.thumbnail}" alt="product">
         <h1 class="name">${product.name}</h1>
         <p class="price">${product.price}kr</p>
+        <span class="qty" data-qty="${product.stock_quantity}">Antal i lager: ${product.stock_quantity}</span>
         <button class="info" data-id="${product.id}">Mer info</button>
         <div id="${product.id}" class="card-inner d-none">
       <div class="card-body">
@@ -145,7 +146,7 @@ const sortProducts = (globalArray:any) => {
 
 // Show or hide if the product is out of stock
 const inStock = () => {
-    const stockElement = document.querySelectorAll('.outofstock')
+    const stockElement = document.querySelectorAll<HTMLElement>('.outofstock')
     stockElement.forEach(item => {
         console.log(item.dataset.stock)
         if(item.dataset.stock === 'instock') {
@@ -192,7 +193,8 @@ document.querySelector('.grid-container')!.addEventListener('click', (e) => {
             description: selectedItem![0].description,
             price: selectedItem![0].price,
             image: selectedItem![0].images.thumbnail,
-            selected: 1// Hur många produkter kunder väljer
+            selected: 1,// Hur många produkter kunder väljer
+            qty: selectedItem![0].stock_quantity
         })
       }
         saveItem()
@@ -224,15 +226,21 @@ const deleteProduct = (productId:Number) => {
 const updateProductQty = (data:any, productId:Number) => {
     console.log(data, productId)
     const index = cartItemData.findIndex(item => item.id === productId)
+    let buyButton = document.querySelector('[data-idcart="' + productId + '"]')! as HTMLButtonElement
+    console.log("Uppdaterad cartItem: ", cartItemData[index].qty, cartItemData[index].selected)
     if(cartItemData[index].selected >= 0) {
-        if (data === 'add') {
+        if (data === 'add' && cartItemData[index].selected < cartItemData[index].qty) {
             cartItemData[index].selected = Number(cartItemData[index].selected) + 1
-
         } else if (data === 'remove') {
             cartItemData[index].selected = Number(cartItemData[index].selected) - 1
+            buyButton.disabled = false
             if(cartItemData[index].selected === 0) {
                 deleteProduct(productId)
             }
+        }
+        else {
+            console.log("För många")
+            buyButton.disabled = true
         }
         saveItem()
     }
@@ -257,8 +265,9 @@ const viewCart = () => {
             <img class="img-fluid rounded cart-image" src="https://www.bortakvall.se/${product.image}" alt="${product.name}">
             <span class="product-name">${product.name}</span>
             <div class="add-remove">
-                <span class="add" data-productid="${product.id}">+</span> ${product.selected} <span class="remove" data-productid="${product.id}">-</span>
+                <span class="add" data-btadd="${product.id}" data-productid="${product.id}">+</span> ${product.selected} <span class="remove" data-productid="${product.id}">-</span>
             </div>
+            <span class="qty">${product.qty} </span>
             <span class="product-price">${product.price} sek/st</span>
             <span class="total-price">${product.price * product.selected} sek</span>
             <div class="delete-item">
