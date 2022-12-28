@@ -239,6 +239,17 @@ img {
   height: fit-content;
 }
 
+.order-receipt {
+  margin-top: 32px;
+  width: 60%;
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
 .cart-list-header {
   display: flex;
   justify-content: space-between;
