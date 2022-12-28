@@ -48,6 +48,7 @@ function renderProducts(array:products[]) {
         <img src="https://www.bortakvall.se/${product.images.thumbnail}" alt="product">
         <h1 class="name">${product.name}</h1>
         <p class="price">${product.price}kr</p>
+        <span class="qty" data-qty="${product.stock_quantity}">Antal i lager: ${product.stock_quantity}</span>
         <button class="info" data-id="${product.id}">Mer info</button>
         <div id="${product.id}" class="card-inner d-none">
       <div class="card-body">
@@ -128,6 +129,7 @@ document.querySelector('#mInfo')?.addEventListener('click', (e) => {
   
   })
     updateTotalItems()
+
 }
 
 const updateTotalItems = () => {
@@ -145,7 +147,7 @@ const sortProducts = (globalArray:any) => {
 
 // Show or hide if the product is out of stock
 const inStock = () => {
-    const stockElement = document.querySelectorAll('.outofstock')
+    const stockElement = document.querySelectorAll<HTMLElement>('.outofstock')
     stockElement.forEach(item => {
         console.log(item.dataset.stock)
         if(item.dataset.stock === 'instock') {
@@ -192,7 +194,8 @@ document.querySelector('.grid-container')!.addEventListener('click', (e) => {
             description: selectedItem![0].description,
             price: selectedItem![0].price,
             image: selectedItem![0].images.thumbnail,
-            selected: 1// Hur många produkter kunder väljer
+            selected: 1,// Hur många produkter kunder väljer
+            qty: selectedItem![0].stock_quantity
         })
       }
         saveItem()
@@ -224,15 +227,21 @@ const deleteProduct = (productId:Number) => {
 const updateProductQty = (data:any, productId:Number) => {
     console.log(data, productId)
     const index = cartItemData.findIndex(item => item.id === productId)
+    let buyButton = document.querySelector('[data-idcart="' + productId + '"]')! as HTMLButtonElement
+    console.log("Uppdaterad cartItem: ", cartItemData[index].qty, cartItemData[index].selected)
     if(cartItemData[index].selected >= 0) {
-        if (data === 'add') {
+        if (data === 'add' && cartItemData[index].selected < cartItemData[index].qty) {
             cartItemData[index].selected = Number(cartItemData[index].selected) + 1
-
         } else if (data === 'remove') {
             cartItemData[index].selected = Number(cartItemData[index].selected) - 1
+            buyButton.disabled = false
             if(cartItemData[index].selected === 0) {
                 deleteProduct(productId)
             }
+        }
+        else {
+            console.log("För många")
+            buyButton.disabled = true
         }
         saveItem()
     }
@@ -257,8 +266,9 @@ const viewCart = () => {
             <img class="img-fluid rounded cart-image" src="https://www.bortakvall.se/${product.image}" alt="${product.name}">
             <span class="product-name">${product.name}</span>
             <div class="add-remove">
-                <span class="add" data-productid="${product.id}">+</span> ${product.selected} <span class="remove" data-productid="${product.id}">-</span>
+                <span class="add" data-btadd="${product.id}" data-productid="${product.id}">+</span> ${product.selected} <span class="remove" data-productid="${product.id}">-</span>
             </div>
+            <span class="qty">${product.qty} </span>
             <span class="product-price">${product.price} sek/st</span>
             <span class="total-price">${product.price * product.selected} sek</span>
             <div class="delete-item">
@@ -299,7 +309,9 @@ const updateTotalPrice = () => {
 
 // Open Cart
 document.querySelector('.cart-icon')!.addEventListener('click', () => {
+  updateTotalItems()
     document.querySelector('.cart-container')!.classList.remove('d-none')
+    document.querySelector('.cart-list')!.classList.remove('d-none')
     // Render the cart view
     viewCart()
 })
@@ -316,7 +328,8 @@ document.querySelector('.cart-close')!.addEventListener('click', () => {
 document.querySelector('.contact-form')!.addEventListener('submit', async e => {
   e.preventDefault()
   //post(person)
-
+document.querySelector('.cart-list')?.classList.add('d-none')
+document.querySelector('.order-receipt')?.classList.remove('d-none')
 
 
   const cartToSend = localStorage.getItem('products')
@@ -380,9 +393,55 @@ return total
 
   await post(person)
   
-  
-  
+  let productCounter = 1
+ document.querySelector('.order-receipt')!.innerHTML =`
+ <div class="cart-list-header">
+        <span class="cart-title">Tack för din beställning!<br>
+        Följande varor är påväg till dig:</span>
+        <span class="material-symbols-outlined receipt-close">cancel</span>
+      </div>
+      <div class="cart-content-container">
+        <div class="item-header">
+          <div class="cart-item-titles">
+            <span>#</span>
+            <span></span>
+            <span class="product-name">Produkt</span>
+            <span class="add-remove">Antal</span>
+            <span>Pris</span>
+            <span>Totalt</span>
+            <span></span>
+          </div>
+        </div>
+        ${cartItemData.map(product =>`
+        <div class="cart-item">
+            <span class="itemnumber">${productCounter++}</span>
+            <img class="img-fluid rounded cart-image" src="https://www.bortakvall.se/${product.image}" alt="${product.name}">
+            <span class="product-name">${product.name}</span>
+            <div class="add-remove">
+                ${product.selected}
+            </div>
+            <span class="product-price">${product.price} sek/st</span>
+            <span class="total-price">${product.price * product.selected} sek</span>
+            <div class="delete-item">
+                <span class="material-symbols-outlined trash" data-itemid="${product.id}">delete</span>
+            </div>
+        </div>`).join('')}
+        <div class="topay">
+          <span class="pay">Att betala: </span><span class="pay-price">${orderTotal(newArray)}</span>
+        </div>
+      </div>
+      </div>
+  `
+  document.querySelector('.total-price')!.innerHTML = '0 sek'
  
+  document.querySelector('.receipt-close')?.addEventListener('click', () => {
+    document.querySelector('.order-receipt')!.classList.add('d-none')
+    document.querySelector('.order-receipt')!.innerHTML=''
+    document.querySelector('.cart-container')?.classList.add('d-none')
+    document.querySelector('.contact-form')!.classList.add('d-none')
+    document.querySelector('#checkout')!.classList.remove('d-none')
+    document.querySelector('#arrow')!.classList.add('d-none')
+    })
 
     // Empty local storage from products when person has clicked submit
     console.log("Clear the cart")
