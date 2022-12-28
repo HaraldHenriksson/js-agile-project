@@ -482,19 +482,19 @@ img {
   }
 }
 
-@media (max-width: 2850px) {
+@media (max-width: 2250px) {
   .card-body {
-    margin-top: 10%;
-    margin-left: 30%;
-    margin-right: 30%;
+    margin-top: 5%;
+    margin-left: 35%;
+    margin-right: 35%;
   }
 }
 
 @media (max-width: 1311px) {
   .card-body {
     margin-top: 10%;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 24%;
+    margin-right: 24%;
   }
 }
 
