@@ -123,10 +123,28 @@ img {
 }
 
 .popup-close{
+  display: inline-block;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  background-color: #8ebfa8;
+  font-size: 1em;
+  font-weight: bold;
+  color: #151116;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
   position: absolute;
   margin-top: 5px;
   right: 8px;
-  cursor: pointer;
+}
+
+.popup-close:hover {
+  background-color: #151116;
+  color: #f9d61064;
+}
+
+.popup-close:focus,
+.popup-close:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
 }
 
 .thumbnail-img{
