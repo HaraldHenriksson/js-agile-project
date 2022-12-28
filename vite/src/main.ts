@@ -218,6 +218,8 @@ itemCollection.addEventListener('click', (e) => {
 
 // Delete Product from cart
 const deleteProduct = (productId:Number) => {
+    let buyButton = document.querySelector('[data-idcart="' + productId + '"]')! as HTMLButtonElement
+    buyButton.disabled = false
     const index = cartItemData.findIndex(item => item.id === productId)
     cartItemData.splice(index, 1)
     saveItem()
