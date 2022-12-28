@@ -96,17 +96,22 @@ img {
 }
 
 .card-body {
-  /* was absolute! */
-  position: relative; 
-  background-color: white;
-  margin-top: 5%;
-  margin-left: 30%;
-  margin-right: 30%;
+  display: block;
+    overflow: auto;
+    height: 100%;
+    z-index: 100;
+    position: absolute;
+    background-color: white;
+    margin-top: 5%;
+    margin-left: 40%;
+    margin-right: 40%;
+    padding-bottom: 0;
+    border-radius: 15px;
+
 }
 
  /* pop up background */
 .card-inner {
-
   background: rgba(0,0,0,0.5);
   position: fixed;
   z-index: 1;
@@ -118,7 +123,6 @@ img {
 }
 
 .popup-close{
-
   position: absolute;
   margin-top: 5px;
   right: 8px;
@@ -465,14 +469,19 @@ img {
   }
 }
 
+@media (max-width: 2850px) {
+  .card-body {
+    margin-top: 10%;
+    margin-left: 30%;
+    margin-right: 30%;
+  }
+}
+
 @media (max-width: 1311px) {
   .card-body {
     margin-top: 10%;
     margin-left: 20%;
     margin-right: 20%;
-  }
-  .thumbnail-img{
-    padding: 10%;
   }
 }
 
@@ -521,29 +530,16 @@ img {
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 414px) {
   .card-body {
     margin-left: 0;
     margin-right: 0;
+    padding-bottom: 20%;
   }
   .thumbnail-img{
     padding: 0;
   }
   .name {
     margin-top: 2px;
-  }
-}
-
-@media (max-height: 851px) {
-  .thumbnail-img{
-    width: 330px;
-    height: 330px;
-  }
-}
-
-@media (max-height: 700px) {
-  .thumbnail-img{
-    width: 200px;
-    height: 200px;
   }
 }
