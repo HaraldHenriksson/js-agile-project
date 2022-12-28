@@ -55,13 +55,10 @@ button {
   border: transparent;
   padding: 0.6em 1.2em;
   background-color: #f9d61064;
-  transition: all 0.2s ease-in-out;
-  width: 100%;
+  transition: all300ms ease;
 }
 button:hover {
-  border-color: #151116;
-  transform: scale(1.0);  
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset
 }
 button:focus,
 button:focus-visible {
