@@ -522,9 +522,6 @@ img {
 }
 
 @media (max-width: 500px) {
-  .card-body {
-    margin-top: 20%;
-  }
   .thumbnail-img{
     padding: 3%;
   }
