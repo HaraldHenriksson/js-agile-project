@@ -56,7 +56,6 @@ button {
   padding: 0.6em 1.2em;
   background-color: #f9d61064;
   transition: all300ms ease;
-  border-radius: 20px;
 }
 button:hover {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset
