@@ -32,7 +32,7 @@ export const post = async (person: newData) => {
         alert('Something went wrong, try again later')
       throw new Error(`${res.status} ${res.statusText}`)
     } else {
-      document.querySelector('#alertBox')!.classList.remove('d-none')
+      // document.querySelector('#alertBox')!.classList.remove('d-none')
       // document.querySelector('.cart-container')!.classList.add('d-none')
     }
     

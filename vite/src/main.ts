@@ -122,6 +122,7 @@ document.querySelector('#mInfo')?.addEventListener('click', (e) => {
   
   })
     updateTotalItems()
+
 }
 
 const updateTotalItems = () => {
@@ -271,7 +272,9 @@ const updateTotalPrice = () => {
 
 // Open Cart
 document.querySelector('.cart-icon')!.addEventListener('click', () => {
+  updateTotalItems()
     document.querySelector('.cart-container')!.classList.remove('d-none')
+    document.querySelector('.cart-list')!.classList.remove('d-none')
     // Render the cart view
     viewCart()
 })
@@ -288,7 +291,8 @@ document.querySelector('.cart-close')!.addEventListener('click', () => {
 document.querySelector('.contact-form')!.addEventListener('submit', async e => {
   e.preventDefault()
   //post(person)
-
+document.querySelector('.cart-list')?.classList.add('d-none')
+document.querySelector('.order-receipt')?.classList.remove('d-none')
 
 
   const cartToSend = localStorage.getItem('products')
@@ -353,11 +357,11 @@ return total
   await post(person)
   
   let productCounter = 1
- document.querySelector('.cart-list')!.innerHTML = cartItemData.map(product => `
+ document.querySelector('.order-receipt')!.innerHTML =`
  <div class="cart-list-header">
         <span class="cart-title">Tack för din beställning!<br>
         Följande varor är påväg till dig:</span>
-        <span class="material-symbols-outlined cart-close">cancel</span>
+        <span class="material-symbols-outlined receipt-close">cancel</span>
       </div>
       <div class="cart-content-container">
         <div class="item-header">
@@ -371,6 +375,7 @@ return total
             <span></span>
           </div>
         </div>
+        ${cartItemData.map(product =>`
         <div class="cart-item">
             <span class="itemnumber">${productCounter++}</span>
             <img class="img-fluid rounded cart-image" src="https://www.bortakvall.se/${product.image}" alt="${product.name}">
@@ -383,15 +388,23 @@ return total
             <div class="delete-item">
                 <span class="material-symbols-outlined trash" data-itemid="${product.id}">delete</span>
             </div>
-        </div>
+        </div>`).join('')}
         <div class="topay">
-          <span class="pay">Att betala: </span><span class="pay-price">20 sek</span>
+          <span class="pay">Att betala: </span><span class="pay-price">${orderTotal(newArray)}</span>
         </div>
       </div>
       </div>
-  `).join('')
-  // updateTotalPrice()
+  `
+  document.querySelector('.total-price')!.innerHTML = '0 sek'
  
+  document.querySelector('.receipt-close')?.addEventListener('click', () => {
+    document.querySelector('.order-receipt')!.classList.add('d-none')
+    document.querySelector('.order-receipt')!.innerHTML=''
+    document.querySelector('.cart-container')?.classList.add('d-none')
+    document.querySelector('.contact-form')!.classList.add('d-none')
+    document.querySelector('#checkout')!.classList.remove('d-none')
+    document.querySelector('#arrow')!.classList.add('d-none')
+    })
 
     // Empty local storage from products when person has clicked submit
     console.log("Clear the cart")
