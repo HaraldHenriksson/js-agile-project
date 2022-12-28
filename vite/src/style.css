@@ -139,12 +139,7 @@ img {
 
 .popup-close:hover {
   background-color: #151116;
-  color: #f9d61064;
-}
-
-.popup-close:focus,
-.popup-close:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  color: #8ebfa8;
 }
 
 .thumbnail-img{
