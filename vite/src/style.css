@@ -99,7 +99,9 @@ img {
   /* was absolute! */
   position: relative; 
   background-color: white;
-  
+  margin-top: 5%;
+  margin-left: 30%;
+  margin-right: 30%;
 }
 
  /* pop up background */
@@ -124,7 +126,8 @@ img {
 }
 
 .thumbnail-img{
-  width: 300px;
+  width: 100%;
+  padding: 20%;
   height: auto;
 }
 .add, .remove {
@@ -448,5 +451,59 @@ img {
 @media (min-width: 901px) {
   .grid-container {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1311px) {
+  .card-body {
+    margin-top: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+  .thumbnail-img{
+    padding: 10%;
+  }
+}
+
+@media (max-width: 900px) {
+  .card-body {
+    margin-top: 15%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+  .thumbnail-img{
+    padding: 8%;
+  }
+}
+
+@media (max-width: 620px) {
+  .card-body {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+
+@media (max-width: 500px) {
+  .card-body {
+    margin-top: 20%;
+  }
+  .thumbnail-img{
+    padding: 3%;
+  }
+}
+
+@media (max-width: 400px) {
+  .card-body {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .thumbnail-img{
+    padding: 0;
+  }
+}
+
+@media (max-height: 851px) {
+  .card-body {
+    overflow-y: auto;
   }
 }
