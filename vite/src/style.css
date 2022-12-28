@@ -377,6 +377,26 @@ img {
   color: rgba(216, 31, 80, 0.905);
 }
 
+.outofstock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;
+}
+
+.outofstock-text {
+  font-size: 48px;
+  font-family: 'Fredoka One', cursive;
+  color: rgba(246, 126, 157, 0.9);
+  rotate: 25deg;
+}
+
 @media (max-width: 500px) {
   .grid-container {
     grid-template-columns: 1fr;

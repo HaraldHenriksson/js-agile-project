@@ -45,6 +45,7 @@ function renderProducts(array:products[]) {
 	document.querySelector('.grid-container')!.innerHTML = array
 		.map(product=> (`
         <div class="card">
+        <div class="outofstock d-none" data-stock="${product.stock_status}"><span class="outofstock-text">Slutsåld</span></div>
         <img src="https://www.bortakvall.se/${product.images.thumbnail}" alt="product">
         <h1 class="name">${product.name}</h1>
         <p class="price">${product.price}kr</p>
@@ -64,6 +65,10 @@ function renderProducts(array:products[]) {
    
       
 		`)).join('')
+
+    // Function that displays if the product is out of stock or not
+    inStock()
+
 		
 // type of "function" that target the product and displays its description with toggle effect
     const infoBtns = document.querySelectorAll('.info')
@@ -128,6 +133,19 @@ document.querySelector('#mInfo')?.addEventListener('click', (e) => {
 
 const updateTotalItems = () => {
     document.querySelector('.cart-item-number')!.innerHTML = `${cartItemData.length}`
+}
+
+// Show or hide if the product is out of stock
+const inStock = () => {
+    const stockElement = document.querySelectorAll('.outofstock')
+    stockElement.forEach(item => {
+        console.log(item.dataset.stock)
+        if(item.dataset.stock === 'instock') {
+            item.classList.add('d-none')
+        } else {
+            item.classList.remove('d-none')
+        }
+    })
 }
 
 // Add to cart button
@@ -455,7 +473,7 @@ const filterButtonResult = (filterResult:any[]) => {
     })
     savedArray = savedArray.flat(1)
     let mergeFilter:any = savedArray.filter((item:any, index:any) => savedArray.indexOf(item) === index)
-    let finalFilter:any = productsCard.filter(items => !mergeFilter.some(mergeItem => items.name === mergeItem.name))
+    let finalFilter:any = productsCard.filter(items => !mergeFilter.some((mergeItem:any) => items.name === mergeItem.name))
     console.log("Sanningens ögonblicK: ", finalFilter)
     renderProducts(finalFilter)
     if(savedArray.length === 0) {
