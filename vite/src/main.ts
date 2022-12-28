@@ -4,6 +4,7 @@ import { fetchProducts } from './api'
 import { products } from './interface'
 import { post } from './api'
 import { newData } from './interface'
+import { order_items } from './interface'
 
 
 
@@ -31,17 +32,19 @@ console.log("Samtliga produkter", productsCard);
 
 getProducts()
 
-
-
-
-
+let globalProductArray:any[]
 
 //rendering av produkter på main sida
 function renderProducts(array:products[]) {
 
+    globalProductArray = array
+
+    document.querySelector('.filtered-items')!.innerHTML = `${array.length} godisar visas i listan`
+
 	document.querySelector('.grid-container')!.innerHTML = array
 		.map(product=> (`
         <div class="card">
+        <div class="outofstock d-none" data-stock="${product.stock_status}"><span class="outofstock-text">Slutsåld</span></div>
         <img src="https://www.bortakvall.se/${product.images.thumbnail}" alt="product">
         <h1 class="name">${product.name}</h1>
         <p class="price">${product.price}kr</p>
@@ -61,6 +64,10 @@ function renderProducts(array:products[]) {
    
       
 		`)).join('')
+
+    // Function that displays if the product is out of stock or not
+    inStock()
+
 		
 // type of "function" that target the product and displays its description with toggle effect
     const infoBtns = document.querySelectorAll('.info')
@@ -120,15 +127,38 @@ document.querySelector('#mInfo')?.addEventListener('click', (e) => {
   document.querySelector('.mInfo')?.classList.toggle('d-none') 
   
   })
+    updateTotalItems()
+}
 
-    //Checks if there is products in local storage and then prints out the number.
+const updateTotalItems = () => {
     document.querySelector('.cart-item-number')!.innerHTML = `${cartItemData.length}`
+}
+
+document.querySelector('.sortbyname')!.addEventListener('click', () => {
+    sortProducts(globalProductArray)
+})
+
+// Sort list based on name
+const sortProducts = (globalArray:any) => {
+    renderProducts(globalArray.sort((a:any, b:any) => a.name.localeCompare(b.name)))
+}
+
+// Show or hide if the product is out of stock
+const inStock = () => {
+    const stockElement = document.querySelectorAll('.outofstock')
+    stockElement.forEach(item => {
+        console.log(item.dataset.stock)
+        if(item.dataset.stock === 'instock') {
+            item.classList.add('d-none')
+        } else {
+            item.classList.remove('d-none')
+        }
+    })
 }
 
 // Add to cart button
 const getJson = localStorage.getItem('products') ?? '[]'
 const cartItemData:any[] = JSON.parse(getJson)
-let qty:number = 0
 
 document.querySelector('.grid-container')!.addEventListener('click', (e) => {
     const target = e.target as HTMLButtonElement
@@ -287,6 +317,40 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
   e.preventDefault()
   //post(person)
 
+
+
+  const cartToSend = localStorage.getItem('products')
+  const finalCart = JSON.parse(cartToSend!!)
+
+  const newArray: order_items[] = []
+  console.log(finalCart);
+  
+finalCart.forEach((item:any) => {
+  console.log('hej');
+   const objects = {
+    product_id: undefined,
+     qty:0,
+     item_price:0,
+     item_total:0,
+}
+  
+  objects.product_id=item.id
+  objects.qty = item.selected
+  objects.item_price = item.price
+  objects.item_total = item.price*item.selected
+    
+  newArray.push(objects)
+  });
+
+const orderTotal = (arr:any) =>{
+  let total = 0
+arr.forEach((item:order_items) => {
+total += item.item_total!
+
+})
+return total
+}
+
   const firstName = document.querySelector<HTMLInputElement>('#newFirstName')?.value
   const lastName = document.querySelector<HTMLInputElement>('#newLastName')?.value
   const adress = document.querySelector<HTMLInputElement>('#newAdress')?.value
@@ -297,27 +361,131 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
 
   //console.log(firstName, lastName, adress, postalNumber, city, phoneNumber, email)
 
-     let person:newData[]= [
+
+
+     let person:newData= 
       {
         customer_first_name: firstName ?? '',
         customer_last_name: lastName ?? '',
         customer_address: adress ?? '',
-        customer_postcode: Number(postalNumber),
+        customer_postcode: postalNumber??'',
         customer_city: city ?? '',
         customer_phone_number: Number(phoneNumber) ?? '',
         customer_email: email ?? '',
-        order_total: 53,
-        order_items: {
-                   product_id: 9,
-                   qty: 11,
-               }
+        order_total: orderTotal(newArray),
+        order_items : newArray
             }
-        ]
+        
   console.log(person)
 
   await post(person)
+  
+  
+  
+ 
+
+    // Empty local storage from products when person has clicked submit
+    console.log("Clear the cart")
+    console.log(cartItemData)
+    while (cartItemData.length > 0) {
+      cartItemData.pop()
+    }
+    localStorage.clear()
+    updateTotalItems()
 })
 
 document.querySelector('.closebtn')!.addEventListener('click', () => {
   document.querySelector('#alertBox')!.classList.add('d-none')
 })
+
+// Add filter text form event
+const filterForm = document.querySelector('#filter') as HTMLFormElement
+filterForm.addEventListener('keyup', (e) => {
+    e.preventDefault()
+    const searchKey:string = filterForm.filtertext.value.toLowerCase().trim()
+    filterQuery(searchKey)
+    if(!searchKey) {
+        renderProducts(productsCard);
+    }
+})
+
+// Text filter function
+const filterQuery = (key:string) => {
+    console.log(key)
+    const searchedItems = productsCard.filter(item => item.name.toLowerCase().trim().includes(key))
+    // Render products
+    renderProducts(searchedItems)
+}
+
+// Filter buttons form
+const filterButtonForm = document.querySelector('#filter-check') as HTMLFormElement
+filterButtonForm.addEventListener('click', (e) => {
+    e.preventDefault()
+    const target = e.target as HTMLElement
+    if(target.tagName === 'BUTTON') {
+        let isSelected: boolean
+        if(!target.classList.contains('selected')) {
+            isSelected = true
+            target.classList.add('selected')
+        } else {
+            isSelected = false
+            target.classList.remove('selected')
+        }
+        filterByButton(target.getAttribute('id'), isSelected)
+    }
+})
+
+// Filter by buttons add filter strings function
+// We can add strings or filter words by adding new arrays
+const filterAlt1:string[] = ['olja', 'oljor', 'vete']
+const filterAlt2:string[] = ['mjölk']
+const filterAlt3:string[] = ['nöt']
+// Global button filter result
+let filterSelected:any[] = []
+
+const filterByButton = (filterType:any, isSelected:boolean) => {
+    if(filterType === 'filter-alt1' && isSelected) {
+        filterSelected.push(filterAlt1)
+    } else if (filterType === 'filter-alt1' && !isSelected) {
+        filterSelected = removeButtonFilter(filterAlt1)
+    }
+    if(filterType === 'filter-alt2' && isSelected) {
+        filterSelected.push(filterAlt2)
+    } else if (filterType === 'filter-alt2' && !isSelected) {
+        filterSelected = removeButtonFilter(filterAlt2)
+    }
+    if(filterType === 'filter-alt3' && isSelected) {
+        filterSelected.push(filterAlt3)
+    } else if (filterType === 'filter-alt3' && !isSelected) {
+        filterSelected = removeButtonFilter(filterAlt3)
+    }
+    console.log("Filter inside function: ", filterSelected.flat(1))
+    filterButtonResult(filterSelected.flat(1))
+}
+
+// Remove filter
+const removeButtonFilter = (filterArr:any) => {
+    let filterRes = filterSelected.flat(1).filter((item: any) => !filterArr.some((altItem: any) => item === altItem))
+    console.log("Remove filter function: ", filterRes)
+    return filterRes
+}
+
+// Get the button filtered result and render it
+const filterButtonResult = (filterResult:any[]) => {
+    console.log(filterResult)
+    let filteredArray:any = []
+    let savedArray: any = []
+    filterResult.forEach(word => {
+        filteredArray = productsCard.filter(item => item.description.toLowerCase().trim().includes(word))
+        savedArray.push(filteredArray)
+    })
+    savedArray = savedArray.flat(1)
+    let mergeFilter:any = savedArray.filter((item:any, index:any) => savedArray.indexOf(item) === index)
+    let finalFilter:any = productsCard.filter(items => !mergeFilter.some((mergeItem:any) => items.name === mergeItem.name))
+    console.log("Sanningens ögonblicK: ", finalFilter)
+    renderProducts(finalFilter)
+    if(savedArray.length === 0) {
+        console.log("Array Empty")
+        renderProducts(productsCard)
+    }
+}
