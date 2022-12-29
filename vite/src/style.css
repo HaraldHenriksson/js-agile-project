@@ -433,6 +433,14 @@ img {
   text-decoration: underline;
 }
 
+#arrow {
+  margin-bottom: 2%;
+}
+
+.contact-form {
+  padding-bottom: 100px;
+}
+
 footer {
   background-color: #2f4038;
   color: #f9d61064;
