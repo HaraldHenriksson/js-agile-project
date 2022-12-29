@@ -18,16 +18,24 @@ const getProducts = async () => {
   
   productsCard = await fetchProducts()
 
-
-
+// funktion för att hämta antal produkter i lager
+  const qtyProducts = () => {
+    let productQty = productsCard.length
+  productsCard.forEach(item => {
+    if(item.stock_status==="outofstock"){
+      productQty -= 1
+    }
+  })
+  return productQty
+}
 
   if (productsCard.length > 0){
 
 console.log("Samtliga produkter", productsCard);
 
-      //Rendering av produkter
+      //Rendering av produkter och antal proukter i lager
     renderProducts(productsCard);
-    document.querySelector('.productsQty')!.innerHTML = `Vi har sjukt nog  ${productsCard.length} olika sorters godis, fräckt!`
+    document.querySelector('.productsQty')!.innerHTML = `Vi har sjukt nog  ${qtyProducts()} olika sorters godis, fräckt!`
     
     }
 }
