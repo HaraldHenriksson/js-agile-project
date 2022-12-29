@@ -409,11 +409,14 @@ return total
   let productCounter = 1
  document.querySelector('.order-receipt')!.innerHTML =`
  <div class="cart-list-header">
-        <span class="cart-title">Tack för din beställning!<br>
-        Följande varor är påväg till dig:</span>
+        <span class="cart-title"><br>
+        </span>
         <span class="material-symbols-outlined receipt-close">cancel</span>
       </div>
       <div class="cart-content-container">
+      <div id="alertBox" class="alert success">
+        Tack för din beställning!🥳 Följande varor är påväg till dig:
+      </div><br>
         <div class="item-header">
           <div class="cart-item-titles">
             <span>#</span>
@@ -466,14 +469,13 @@ return total
     updateTotalItems()
 })
 
-document.querySelector('.closebtn')!.addEventListener('click', () => {
-  document.querySelector('#alertBox')!.classList.add('d-none')
-})
 
 // Add filter text form event
 const filterForm = document.querySelector('#filter') as HTMLFormElement
 filterForm.addEventListener('keyup', (e) => {
     e.preventDefault()
+    console.log('filterform');
+    
     const searchKey:string = filterForm.filtertext.value.toLowerCase().trim()
     filterQuery(searchKey)
     if(!searchKey) {
@@ -484,6 +486,7 @@ filterForm.addEventListener('keyup', (e) => {
 // Text filter function
 const filterQuery = (key:string) => {
     console.log(key)
+    console.log('filterQuery')
     const searchedItems = productsCard.filter(item => item.name.toLowerCase().trim().includes(key))
     // Render products
     renderProducts(searchedItems)

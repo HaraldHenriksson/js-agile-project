@@ -20,13 +20,8 @@
           <span class="cart-item-number">0</span>
         </div>
       </div>
-      <div id="alertBox" class="alert success d-none">
-        Successful!🥳 Thank you for you purchase
-        <span class="closebtn">&times;</span>
-      </div>
     </header>
     <main>
-      
       <div class="container-lg">
         <p class="productsQty"></p>
         <div class="filterfunctions">
@@ -94,31 +89,24 @@
         </span></a>
       <form class="contact-form d-none">
         <div class="form-group">
-          <label>Förnamn</label>
           <input id="newFirstName" type="text" class="form-control" placeholder="Förnamn" required>
         </div>
         <div class="form-group">
-          <label>Efternamn</label>
           <input id="newLastName" type="text" class="form-control" placeholder="Efternamn" required>
         </div>
         <div class="form-group">
-          <label>Address</label>
           <input id="newAdress" type="text" class="form-control" placeholder="Adress" required>
         </div>
         <div class="form-group">
-          <label>Postnummer</label>
           <input id="newPostalNumber" type="text" class="form-control" placeholder="Postnummer" required>
         </div>
         <div class="form-group">
-          <label>Stad</label>
           <input id="newCity" type="text" class="form-control" placeholder="Stad" required>
         </div>
         <div class="form-group">
-          <label>Telefonnummer</label>
           <input id="newPhoneNumber" type="text" class="form-control" placeholder="Telefonnummer">
         </div>
         <div class="form-group">
-          <label>Email</label>
           <input id="newEmail" type="text" class="form-control" placeholder="exempel@exempel.se" required>
         </div>
         <button id="submit" type="submit" class="btn btn-primary">Skicka och lägg beställning</button>
@@ -127,8 +115,15 @@
       <div class="order-receipt d-none">
       </div>
     </div>
-
-    <footer></footer>
+    <footer>
+      <div class="container">
+        <p>Copyright &copy; 2022 Webshop</p>
+        <ul>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </footer>
     <script type="module" src="src/main.ts"></script>
 
   </body>
