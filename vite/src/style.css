@@ -433,6 +433,41 @@ img {
   text-decoration: underline;
 }
 
+footer {
+  background-color: #2f4038;
+  color: #f9d61064;
+  padding: 1em;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+  padding: 0.5em 0;
+}
+
+footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+footer li {
+  margin: 0 0.5em;
+}
+
+footer a {
+  color: #f9d61064;
+  text-decoration: none;
+  transition: all 300ms ease;
+}
+
+footer a:hover {
+  color: #151116;
+}
+
 @media (max-width: 500px) {
   .grid-container {
     grid-template-columns: 1fr;
