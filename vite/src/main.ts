@@ -17,6 +17,10 @@ let productsCard: products[] = []
 const getProducts = async () => {
   
   productsCard = await fetchProducts()
+
+
+
+
   if (productsCard.length > 0){
 
 console.log("Samtliga produkter", productsCard);
@@ -24,8 +28,7 @@ console.log("Samtliga produkter", productsCard);
       //Rendering av produkter
     renderProducts(productsCard);
     document.querySelector('.productsQty')!.innerHTML = `Vi har sjukt nog  ${productsCard.length} olika sorters godis, fräckt!`
-    // test för att få eventlistener att fungerar på rederad data
-    // isRend = true
+    
     }
 }
 
