@@ -458,14 +458,13 @@ return total
     updateTotalItems()
 })
 
-document.querySelector('.closebtn')!.addEventListener('click', () => {
-  document.querySelector('#alertBox')!.classList.add('d-none')
-})
 
 // Add filter text form event
 const filterForm = document.querySelector('#filter') as HTMLFormElement
 filterForm.addEventListener('keyup', (e) => {
     e.preventDefault()
+    console.log('filterform');
+    
     const searchKey:string = filterForm.filtertext.value.toLowerCase().trim()
     filterQuery(searchKey)
     if(!searchKey) {
@@ -476,6 +475,7 @@ filterForm.addEventListener('keyup', (e) => {
 // Text filter function
 const filterQuery = (key:string) => {
     console.log(key)
+    console.log('filterQuery')
     const searchedItems = productsCard.filter(item => item.name.toLowerCase().trim().includes(key))
     // Render products
     renderProducts(searchedItems)
