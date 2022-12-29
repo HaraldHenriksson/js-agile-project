@@ -317,7 +317,6 @@ img {
 }
 
 .alert {
-  padding: 10px;
   color: white;
 }
 
@@ -473,6 +472,12 @@ img {
 @media (min-width: 901px) {
   .grid-container {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 901px) {
+  .order-receipt {
+    width: 95%;
   }
 }
 
