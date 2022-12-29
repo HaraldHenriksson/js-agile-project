@@ -211,7 +211,7 @@ img {
   height: 100vh;
   display: flex;
   justify-content: center;
-  position: absolute;
+  position: fixed;
   top: 5%;
   left: 0;
   overflow: auto;
