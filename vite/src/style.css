@@ -211,7 +211,7 @@ img {
   height: 100vh;
   display: flex;
   justify-content: center;
-  position: fixed;
+  position: absolute;
   top: 5%;
   left: 0;
   overflow: auto;
@@ -317,10 +317,8 @@ img {
 }
 
 .alert {
-  padding: 20px;
-  background-color: #f44336;
+  padding: 10px;
   color: white;
-  margin-bottom: 15px;
 }
 
 .alert.success {
