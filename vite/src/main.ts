@@ -35,7 +35,7 @@ console.log("Samtliga produkter", productsCard);
 
       //Rendering av produkter och antal proukter i lager
     renderProducts(productsCard);
-    document.querySelector('.productsQty')!.innerHTML = `Vi har sjukt nog  ${qtyProducts()} olika sorters godis, fräckt!`
+    document.querySelector('.productsQty')!.innerHTML = `Vi har sjukt nog  ${qtyProducts()} av ${productsCard.length} olika sorters godis, fräckt!`
     
     }
 }
