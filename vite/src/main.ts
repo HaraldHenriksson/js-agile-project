@@ -498,7 +498,7 @@ filterButtonForm.addEventListener('click', (e) => {
 
 // Filter by buttons add filter strings function
 // We can add strings or filter words by adding new arrays
-const filterAlt1:string[] = ['olja', 'oljor', 'vete']
+const filterAlt1:string[] = ['vete', 'korn', 'malt']
 const filterAlt2:string[] = ['mjölk']
 const filterAlt3:string[] = ['nöt']
 // Global button filter result
