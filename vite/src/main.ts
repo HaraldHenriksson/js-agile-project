@@ -35,7 +35,7 @@ console.log("Samtliga produkter", productsCard);
 
       //Rendering av produkter och antal proukter i lager
     renderProducts(productsCard);
-    document.querySelector('.productsQty')!.innerHTML = `Vi har sjukt nog  ${qtyProducts()} av ${productsCard.length} olika sorters godis, fräckt!`
+    document.querySelector('.productsQty')!.innerHTML = `Vi har hela  ${qtyProducts()} sorter godis inne av sjuka ${productsCard.length}, fräckt!`
     
     }
 }
@@ -149,6 +149,7 @@ const updateTotalItems = () => {
 
 document.querySelector('.sortbyname')!.addEventListener('click', () => {
     sortProducts(globalProductArray)
+    renderProducts(productsCard)
 })
 
 // Sort list based on name
