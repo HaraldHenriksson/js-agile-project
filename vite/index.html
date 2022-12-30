@@ -1,13 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <meta name="author" content="Joachim maddog, Harald the wiking, Andreas the fool">
+    <meta name="designer" content="Joachim maddog, Harald the wiking, Andreas the fool">
+    <meta name="city" content="Malmö">
+    <meta name="country" content="Sverige">
+    <meta name="robots" content="index, follow">
+    <meta name="og:type" content="website">
+    <meta name="og:title" content="Bortakväll">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+    <title>Webshop</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <header>
+      <div class="container-fluid header-container">
+
+        <div class="container header d-flex justify-content-end align-items-center">
+          <div class="logo">
+            🍬
+            <span class="logo-text">Bortakväll</span>
+          </div>
+          <span class="material-symbols-outlined cart-icon">shopping_cart</span>
+          <span class="cart-item-number">0</span>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="container-lg">
+        <p class="productsQty"></p>
+        <div class="filterfunctions">
+          <div class="filtertextinput">
+            <strong>Filter</strong>
+            <form id="filter">
+              <input type="text" id="filtertext" class="filtertext" placeholder="Skriv för att filtrera">
+            </form>
+          </div>
+          <div class="button-filter">
+            <strong>Visa produkter utan:</strong>
+            <form id="filter-check" class="filter-check">
+              <button id="filter-alt1" class="filterbt">Vete/korn</button>
+              <button id="filter-alt2" class="filterbt">Mjölk</button>
+              <button id="filter-alt3" class="filterbt">Nötter</button>
+            </form>
+          </div>
+        </div>
+        <div class="filtered-items">
+          <!-- How many products is in the list -->
+        </div>
+        <div class="sortbyname">
+          <span class="material-symbols-outlined">sort</span>
+          <span>Sortera listan efter namn</span>
+        </div>
+        <div class="grid-container">
+        <!-- Products -->
+        </div>
+      </div>
+    </main>
+
+    <!-- My test responsive cart -->
+    <div class="cart-container d-none">
+      <div class="cart-list">
+        <div class="cart-list-header">
+          <span class="cart-title">Varukorg</span>
+          <span class="material-symbols-outlined cart-close">cancel</span>
+        </div>
+        <div class="cart-content-container">
+          <div class="item-header">
+            <div class="cart-item-titles">
+              <span>#</span>
+              <span></span>
+              <span class="product-name">Produkt</span>
+              <span class="add-remove">Antal</span>
+              <span>I lager</span>
+              <span>Pris</span>
+              <span>Totalt</span>
+              <span></span>
+            </div>
+          </div>
+          <div id="itemcollection">
+            <!-- Cart items -->
+          </div>
+          <div class="topay">
+            <span class="pay">Att betala: </span><span class="pay-price">20 sek</span>
+          </div>
+        </div>
+
+
+
+        <button id="checkout" class="btn btn-primary">Gå till kassan</button>
+       <a href="#"><span id="arrow" class="material-symbols-outlined d-none">
+        arrow_upward
+        </span></a>
+      <form class="contact-form d-none">
+        <div class="form-group">
+          <input id="newFirstName" type="text" class="form-control" placeholder="Förnamn" required>
+        </div>
+        <div class="form-group">
+          <input id="newLastName" type="text" class="form-control" placeholder="Efternamn" required>
+        </div>
+        <div class="form-group">
+          <input id="newAdress" type="text" class="form-control" placeholder="Adress" required>
+        </div>
+        <div class="form-group">
+          <input id="newPostalNumber" type="text" class="form-control" placeholder="Postnummer" required>
+        </div>
+        <div class="form-group">
+          <input id="newCity" type="text" class="form-control" placeholder="Stad" required>
+        </div>
+        <div class="form-group">
+          <input id="newPhoneNumber" type="text" class="form-control" placeholder="Telefonnummer">
+        </div>
+        <div class="form-group">
+          <input id="newEmail" type="text" class="form-control" placeholder="exempel@exempel.se" required>
+        </div>
+        <button id="submit" type="submit" class="btn btn-primary">Skicka och lägg beställning</button>
+      </form>
+      </div>
+      <div class="order-receipt d-none">
+      </div>
+    </div>
+    <footer>
+      <div class="container">
+        <p>Copyright &copy; 2022 Webshop</p>
+        <ul>
+          <li><a href="#">Terms of Use</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </footer>
+    <script type="module" src="src/main.ts"></script>
+
   </body>
 </html>
