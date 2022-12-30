@@ -119,10 +119,13 @@ function renderProducts(array:products[]) {
     })
   
   document.querySelector('#checkout')?.addEventListener('click', () => {
+    if(cartItemData.length===0)
+    alert('Varukorgen är tom, fyll på med godis!')
+    else{
     document.querySelector('.contact-form')!.classList.remove('d-none')
     document.querySelector('#checkout')!.classList.add('d-none')
     document.querySelector('#arrow')!.classList.remove('d-none')
-  })
+  }})
 
   document.querySelector('#arrow')?.addEventListener('click', () => {
     document.querySelector('.contact-form')!.classList.add('d-none')
@@ -342,6 +345,10 @@ document.querySelector('.cart-close')!.addEventListener('click', () => {
 document.querySelector('.contact-form')!.addEventListener('submit', async e => {
   e.preventDefault()
   //post(person)
+ 
+ 
+  
+  // if(){}
 document.querySelector('.cart-list')?.classList.add('d-none')
 document.querySelector('.order-receipt')?.classList.remove('d-none')
 
