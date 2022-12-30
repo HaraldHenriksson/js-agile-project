@@ -421,6 +421,15 @@ img {
   rotate: 25deg;
 }
 
+.logo {
+  width: 100%;
+  font-size: 48px;
+}
+
+.logo-text {
+  font-family: 'Fredoka One', cursive;
+}
+
 .sortbyname {
   display: flex;
   flex-direction: row;
@@ -561,6 +570,12 @@ footer a:hover {
   .card-body {
     margin-left: 10%;
     margin-right: 10%;
+  }
+  .logo-text {
+    font-size: 24px;
+  }
+  .logo {
+    font-size: 32px;
   }
 }
 
