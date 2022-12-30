@@ -2,6 +2,10 @@
 
 ```bash
 vite/
+├─ dist/
+│  ├─ assets/
+│  ├─ index.html
+│  ├─ vite.svg
 ├─ node_modules/
 ├─ public/
 │  ├─ vite.svg
