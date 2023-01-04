@@ -30,9 +30,6 @@ const getProducts = async () => {
 }
 
   if (productsCard.length > 0){
-
-console.log("Samtliga produkter", productsCard);
-
       //Rendering av produkter och antal proukter i lager
     renderProducts(productsCard);
     document.querySelector('.productsQty')!.innerHTML = `Vi har hela  ${qtyProducts()} sorter godis inne av sjuka ${productsCard.length}, fräckt!`
@@ -83,7 +80,6 @@ function renderProducts(array:products[]) {
 		
 // type of "function" that target the product and displays its description with toggle effect
     const infoBtns = document.querySelectorAll('.info')
-    console.log(infoBtns);
     infoBtns.forEach((btn) => {
 
       btn.addEventListener('click', (e) => {
@@ -134,11 +130,7 @@ function renderProducts(array:products[]) {
   })
 
 
-document.querySelector('#mInfo')?.addEventListener('click', (e) => {
-  console.log('hej');
-  const target = e.target as HTMLElement
-  console.log(target.dataset);
-  
+document.querySelector('#mInfo')?.addEventListener('click', () => {  
   document.querySelector('.mInfo')?.classList.toggle('d-none') 
   
   })
@@ -164,7 +156,6 @@ const sortProducts = (globalArray:any) => {
 const inStock = () => {
     const stockElement = document.querySelectorAll<HTMLElement>('.outofstock')
     stockElement.forEach(item => {
-        console.log(item.dataset.stock)
         if(item.dataset.stock === 'instock') {
             item.classList.add('d-none')
         } else {
@@ -179,7 +170,6 @@ const cartItemData:any[] = JSON.parse(getJson)
 
 document.querySelector('.grid-container')!.addEventListener('click', (e) => {
     const target = e.target as HTMLButtonElement
-    console.log('hej');
 
 
   
@@ -242,10 +232,8 @@ const deleteProduct = (productId:Number) => {
 
 // Update product qty cart data
 const updateProductQty = (data:any, productId:Number) => {
-    console.log(data, productId)
     const index = cartItemData.findIndex(item => item.id === productId)
     let buyButton = document.querySelector('[data-idcart="' + productId + '"]')! as HTMLButtonElement
-    console.log("Uppdaterad cartItem: ", cartItemData[index].qty, cartItemData[index].selected)
     if(cartItemData[index].selected >= 0) {
         if (data === 'add' && cartItemData[index].selected < cartItemData[index].qty) {
             cartItemData[index].selected = Number(cartItemData[index].selected) + 1
@@ -257,7 +245,6 @@ const updateProductQty = (data:any, productId:Number) => {
             }
         }
         else {
-            console.log("För många")
             buyButton.disabled = true
         }
         saveItem()
@@ -271,7 +258,6 @@ const saveItem = () => {
     localStorage.setItem('products', jsonItem)
     document.querySelector('.cart-item-number')!.innerHTML = `${cartItemData.length}`
     viewCart()
-    console.log(localStorage)
 }
 
 //Render cart with products
@@ -315,7 +301,6 @@ itemCollection.addEventListener('click', (e) => {
 const updateTotalPrice = () => {
     let productCost = 0
     let totalPrice = 0
-    console.log("Starting total cost")
     const totalCost = document.querySelectorAll('.total-price')
     totalCost.forEach(item => {
         productCost = Number(item.innerHTML.replace(" sek", ""))
@@ -357,10 +342,8 @@ document.querySelector('.order-receipt')?.classList.remove('d-none')
   const finalCart = JSON.parse(cartToSend!!)
 
   const newArray: order_items[] = []
-  console.log(finalCart);
   
 finalCart.forEach((item:any) => {
-  console.log('hej');
    const objects = {
     product_id: undefined,
      qty:0,
@@ -393,9 +376,6 @@ return total
   const phoneNumber = document.querySelector<HTMLInputElement>('#newPhoneNumber')?.value
   const email = document.querySelector<HTMLInputElement>('#newEmail')?.value
 
-  //console.log(firstName, lastName, adress, postalNumber, city, phoneNumber, email)
-
-
 
      let person:newData= 
       {
@@ -410,8 +390,6 @@ return total
         order_items : newArray
             }
         
-  console.log(person)
-
   await post(person)
   
   let productCounter = 1
@@ -468,8 +446,6 @@ return total
     })
 
     // Empty local storage from products when person has clicked submit
-    console.log("Clear the cart")
-    console.log(cartItemData)
     while (cartItemData.length > 0) {
       cartItemData.pop()
     }
@@ -482,7 +458,6 @@ return total
 const filterForm = document.querySelector('#filter') as HTMLFormElement
 filterForm.addEventListener('keyup', (e) => {
     e.preventDefault()
-    console.log('filterform');
     
     const searchKey:string = filterForm.filtertext.value.toLowerCase().trim()
     filterQuery(searchKey)
@@ -493,8 +468,6 @@ filterForm.addEventListener('keyup', (e) => {
 
 // Text filter function
 const filterQuery = (key:string) => {
-    console.log(key)
-    console.log('filterQuery')
     const searchedItems = productsCard.filter(item => item.name.toLowerCase().trim().includes(key))
     // Render products
     renderProducts(searchedItems)
@@ -542,20 +515,17 @@ const filterByButton = (filterType:any, isSelected:boolean) => {
     } else if (filterType === 'filter-alt3' && !isSelected) {
         filterSelected = removeButtonFilter(filterAlt3)
     }
-    console.log("Filter inside function: ", filterSelected.flat(1))
     filterButtonResult(filterSelected.flat(1))
 }
 
 // Remove filter
 const removeButtonFilter = (filterArr:any) => {
     let filterRes = filterSelected.flat(1).filter((item: any) => !filterArr.some((altItem: any) => item === altItem))
-    console.log("Remove filter function: ", filterRes)
     return filterRes
 }
 
 // Get the button filtered result and render it
 const filterButtonResult = (filterResult:any[]) => {
-    console.log(filterResult)
     let filteredArray:any = []
     let savedArray: any = []
     filterResult.forEach(word => {
@@ -565,10 +535,8 @@ const filterButtonResult = (filterResult:any[]) => {
     savedArray = savedArray.flat(1)
     let mergeFilter:any = savedArray.filter((item:any, index:any) => savedArray.indexOf(item) === index)
     let finalFilter:any = productsCard.filter(items => !mergeFilter.some((mergeItem:any) => items.name === mergeItem.name))
-    console.log("Sanningens ögonblicK: ", finalFilter)
     renderProducts(finalFilter)
     if(savedArray.length === 0) {
-        console.log("Array Empty")
         renderProducts(productsCard)
     }
 }
