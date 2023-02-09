@@ -492,6 +492,12 @@ footer a:hover {
   color: #784141;
 }
 
+.order_details {
+  padding: 24px;
+  background: #bbecd7;
+  margin-bottom: 35px;
+}
+
 @media (max-width: 500px) {
   .grid-container {
     grid-template-columns: 1fr;

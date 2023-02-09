@@ -10,7 +10,6 @@ export const fetchProducts = async () => {
 }
 
 export const post = async (person: newData) => {
-    console.log(person)
     const res = await fetch('https://www.bortakvall.se/api/orders', {
       method: 'POST',
       headers: {
@@ -24,5 +23,3 @@ export const post = async (person: newData) => {
     }
     return await res.json()
   }
-
-// return await res.json() as newData[]
