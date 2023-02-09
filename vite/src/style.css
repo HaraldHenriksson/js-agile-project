@@ -203,6 +203,11 @@ img {
   font-weight: bold;
   font-size: 12px;
   border: 1px solid #7e4845;
+  cursor: pointer;
+}
+
+.receipt-close{
+  cursor: pointer;
 }
 
 .cart-container {

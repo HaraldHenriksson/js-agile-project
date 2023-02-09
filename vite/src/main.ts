@@ -102,6 +102,7 @@ function renderProducts(array:products[]) {
     })
   
   document.querySelector('#checkout')?.addEventListener('click', () => {
+      console.log("CHECK")
     if(cartItemData.length===0) {
         alert('Varukorgen är tom, fyll på med godis!')
     } else {
@@ -109,7 +110,7 @@ function renderProducts(array:products[]) {
         document.querySelector('#checkout')!.classList.add('d-none')
         document.querySelector('#arrow')!.classList.remove('d-none')
   }})
-        document.querySelector('#arrow')?.addEventListener('click', () => {
+    document.querySelector('#arrow')?.addEventListener('click', () => {
         document.querySelector('.contact-form')!.classList.add('d-none')
         document.querySelector('#checkout')!.classList.remove('d-none')
         document.querySelector('#arrow')!.classList.add('d-none')
@@ -200,6 +201,7 @@ const deleteProduct = (productId:Number) => {
     buyButton.disabled = false
     const index = cartItemData.findIndex(item => item.id === productId)
     cartItemData.splice(index, 1)
+    checkoutAttribute()
     saveItem()
 }
 
@@ -282,9 +284,19 @@ const updateTotalPrice = () => {
     document.querySelector('.pay-price')!.innerHTML = `${totalPrice} sek`
 }
 
+// Disable the Checkout button
+const checkoutAttribute = () => {
+    if(cartItemData.length===0) {
+        document.querySelector('#checkout')!.setAttribute("disabled", "")
+    } else {
+        document.querySelector('#checkout')!.removeAttribute("disabled")
+    }
+}
+
 // Open Cart
-document.querySelector('.cart-icon')!.addEventListener('click', () => {
-  updateTotalItems()
+document.querySelector('.checkout-cart-icon')!.addEventListener('click', () => {
+    checkoutAttribute()
+    updateTotalItems()
     document.querySelector('.cart-container')!.classList.remove('d-none')
     document.querySelector('.cart-list')!.classList.remove('d-none')
     // Render the cart view
@@ -373,8 +385,6 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
         } else {
             phoneNumber = orderReceipt.customer_phone_number
         }
-
-        console.log(orderReceipt)
 
         document.querySelector('.cart-list')?.classList.add('d-none')
         document.querySelector('.order-receipt')?.classList.remove('d-none')
