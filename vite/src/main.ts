@@ -1,7 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import './style.css'
 import {fetchProducts, post} from './api'
-import {newData, order_items, products} from './interface'
+import { newData, order_items, products} from './interface'
+
+//newData
 
 //lokal variabel som innehåller alla produkter från server
 let productsCard: products[] = []
@@ -300,8 +302,8 @@ document.querySelector('.cart-close')!.addEventListener('click', () => {
 document.querySelector('.contact-form')!.addEventListener('submit', async e => {
     e.preventDefault()
 
-    document.querySelector('.cart-list')?.classList.add('d-none')
-    document.querySelector('.order-receipt')?.classList.remove('d-none')
+    // document.querySelector('.cart-list')?.classList.add('d-none')
+    // document.querySelector('.order-receipt')?.classList.remove('d-none')
 
     const cartToSend = localStorage.getItem('products')
     const finalCart = JSON.parse(cartToSend!!)
@@ -340,7 +342,9 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
     const phoneNumber = document.querySelector<HTMLInputElement>('#newPhoneNumber')?.value
     const email = document.querySelector<HTMLInputElement>('#newEmail')?.value
 
-    let person:newData= {
+    //let person:newData= {
+
+    let person = {
         customer_first_name: firstName ?? '',
         customer_last_name: lastName ?? '',
         customer_address: adress ?? '',
@@ -352,8 +356,35 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
         order_items : newArray
     }
 
-    await post(person)
-  
+    // Render receipt function
+    const renderRecipe = (data:newData) => {
+        console.log(data)
+    }
+
+    //await post(person)
+    // Check and validate the receipt information
+    const statusFail = document.querySelector('.status-fail') as HTMLDivElement
+    try {
+        const data = await post(person)
+        const statusMessage = String(Object.values(data.data)[0])
+
+        if(String(data.status) == 'fail') {
+            statusFail.classList.remove('d-none')
+            statusFail.innerHTML = statusMessage
+            return
+        } else {
+            console.log("Do you read here")
+            renderRecipe(data as newData)
+        }
+    } catch (e) {
+        console.error(e);
+        statusFail.classList.remove('d-none')
+        statusFail.innerHTML = `Server Error: ${e}`
+        return
+    }
+
+    console.log("Fortsätter du här?")
+
     let productCounter = 1
     document.querySelector('.order-receipt')!.innerHTML =`
         <div class="cart-list-header">
@@ -396,9 +427,9 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
         </div>
         </div>
         `
-    document.querySelector('.total-price')!.innerHTML = '0 sek'
 
-    document.querySelector('.receipt-close')?.addEventListener('click', () => {
+        document.querySelector('.total-price')!.innerHTML = '0 sek'
+        document.querySelector('.receipt-close')?.addEventListener('click', () => {
         document.querySelector('.order-receipt')!.classList.add('d-none')
         document.querySelector('.order-receipt')!.innerHTML=''
         document.querySelector('.cart-container')?.classList.add('d-none')

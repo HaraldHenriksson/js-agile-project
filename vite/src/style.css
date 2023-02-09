@@ -447,7 +447,7 @@ img {
 }
 
 .contact-form {
-  padding-bottom: 100px;
+  padding-bottom: 35px;
 }
 
 footer {
@@ -483,6 +483,13 @@ footer a {
 
 footer a:hover {
   color: #151116;
+}
+
+.status-fail {
+  padding: 12px;
+  background: #FF928B;
+  border: 1px solid #b36060;
+  color: #784141;
 }
 
 @media (max-width: 500px) {
