@@ -16,13 +16,13 @@ export interface products {
 }
 
 
-export interface order_items{
-    product_id: number | undefined,
-    qty: number | undefined,
-    item_price:number | undefined,
-    item_total:number | undefined,
-
+export interface order_items {
+    product_id: number,
+    qty: number,
+    item_price:number,
+    item_total:number,
 }
+
 export interface newData  {
     customer_first_name: string,
     customer_last_name: string,

@@ -3,8 +3,6 @@ import './style.css'
 import {fetchProducts, post} from './api'
 import { newData, order_items, products, OrderResponse} from './interface'
 
-//newData
-
 //lokal variabel som innehåller alla produkter från server
 let productsCard: products[] = []
 
@@ -321,10 +319,10 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
   
     finalCart.forEach((item:any) => {
         const objects = {
-            product_id: undefined,
-             qty:0,
-             item_price:0,
-             item_total:0,
+            product_id: 0,
+            qty:0,
+            item_price:0,
+            item_total:0,
         }
 
         objects.product_id=item.id
