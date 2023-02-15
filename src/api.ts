@@ -1,7 +1,7 @@
 import { newData } from './interface'
 
 export const fetchProducts = async () => {
-    const res = await fetch('https://www.bortakvall.se/api/products/')
+    const res = await fetch('http://localhost:3000/products')
     if (!res.ok) {
         throw new Error(`${res.status} ${res.statusText}`)
     }
@@ -10,7 +10,7 @@ export const fetchProducts = async () => {
 }
 
 export const post = async (person: newData) => {
-    const res = await fetch('https://www.bortakvall.se/api/orders', {
+    const res = await fetch('http://localhost:3000/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

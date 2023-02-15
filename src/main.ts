@@ -363,6 +363,8 @@ document.querySelector('.contact-form')!.addEventListener('submit', async e => {
 
     // Render receipt function
     const renderRecipe = (orderData:any) => {
+        console.log(orderData);
+        
 
         let orderReceipt:OrderResponse = {
             order_id: orderData.data.id,
